@@ -17,6 +17,7 @@ def potcar_str2dict(potcar_list: Union[str, List[str], None]) -> dict:
     If potcar_dict is None, {} is returned.
     Examples
         ["Mg_pv", O_h"] -> {"Mg": "Mg_pv", "O": "O_h"}
+        "Mg_pv O_h" -> {"Mg": "Mg_pv", "O": "O_h"}
         "Mg_pv" -> {"Mg": "Mg_pv"}
         None -> {}
 
@@ -31,7 +32,7 @@ def potcar_str2dict(potcar_list: Union[str, List[str], None]) -> dict:
     if potcar_list is None:
         return {}
     elif isinstance(potcar_list, str):
-        potcar_list = [potcar_list]
+        potcar_list = potcar_list.split()
 
     d = {}
     for p in potcar_list:

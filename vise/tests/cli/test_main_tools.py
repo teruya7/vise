@@ -20,6 +20,12 @@ def test_str():
     assert actual == expected
 
 
+def test_str_with_space():
+    expected = {"Mg": "Mg_pv", "O": "O_h"}
+    actual = potcar_str2dict("Mg_pv O_h")
+    assert actual == expected
+
+
 def test_mutliple_potcars_for_same_element_error():
     with pytest.raises(ValueError):
         potcar_str2dict(["Mg_pv", "Mg"])

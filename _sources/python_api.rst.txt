@@ -8,9 +8,8 @@ In this tutorial, we show how to use vise in the python program.
    :local:
    :depth: 2
 
-==============================
 Quick Start with vise.api
-==============================
+-------------------------
 
 The ``vise.api`` module provides a clean Python API for all vise functionality.
 
@@ -228,9 +227,8 @@ Utility Functions
     # Create lightweight volumetric data
     util.make_light_weight_volumetric_data("CHGCAR")
 
-==============================
 Legacy API (Low-level)
-==============================
+----------------------
 
 For more fine-grained control, you can use the lower-level API directly.
 
@@ -267,9 +265,8 @@ The VaspInputFiles class constructor also takes the overridden_incar_settings, w
 
 Note also that the vise.yaml files are also parsed.
 
-==============================
 FireWorks Integration
-==============================
+---------------------
 
 Here, we show an example of FireTask in `FireWorks <https://materialsproject.github.io/fireworks/index.html>`_.
 
@@ -299,9 +296,8 @@ Here, we show an example of FireTask in `FireWorks <https://materialsproject.git
                                          self.get("overridden_incar_settings", {}))
             input_files.create_input_files(dirname=Path("."))
 
-==============================
 API Reference
-==============================
+-------------
 
 vise.api.structure
 ~~~~~~~~~~~~~~~~~~

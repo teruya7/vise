@@ -39,8 +39,8 @@ VASP users prepare input files and analyze calculation results.
    :maxdepth: 2
    :caption: Reference
 
+   api/index
    cli_commands
-   python_api
    citation
 
 Indices and tables

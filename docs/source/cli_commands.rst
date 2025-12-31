@@ -1,5 +1,6 @@
-CLI Reference
-=============
+============
+CLI Commands
+============
 
 Complete reference for all vise command-line commands.
 

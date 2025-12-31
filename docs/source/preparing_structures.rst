@@ -1,5 +1,6 @@
-Tutorial -- Preparation of POSCAR
-----------------------------------
+====================
+Preparing Structures
+====================
 
 In this tutorial, we show how to prepare POSCAR file via the Materials Project (MP) database.
 
@@ -87,5 +88,5 @@ Get primitive or conventional cells:
 Next Steps
 ==========
 
-- :doc:`tutorial_input_set` - Generate VASP input files
-- :doc:`cli_reference` - Full CLI command reference
+- :doc:`generating_inputs` - Generate VASP input files
+- :doc:`cli_commands` - Full CLI command reference

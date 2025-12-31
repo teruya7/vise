@@ -1,5 +1,6 @@
-Tutorial -- Input Set
----------------------
+======================
+Generating VASP Inputs
+======================
 
 This tutorial shows how to generate VASP input files.
 
@@ -30,7 +31,7 @@ Override POTCAR and INCAR settings:
     vise vs --potcar Mg_pv -uis ALGO All
 
 You can also control settings via ``vise.yaml`` file, but command line arguments take priority.
-See :doc:`tutorial_vise_yaml` for details.
+See :doc:`configuration` for details.
 
 Tasks
 =====
@@ -133,6 +134,6 @@ Example:
 See Also
 ========
 
-- :doc:`tutorial_properties` - Analyze calculation results
-- :doc:`cli_reference` - Full CLI reference
+- :doc:`band_dos` - Analyze calculation results
+- :doc:`cli_commands` - Full CLI reference
 - :doc:`workflows` - Complete workflow examples

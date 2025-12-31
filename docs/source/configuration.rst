@@ -1,5 +1,6 @@
-Tutorial -- vise.yaml
----------------------
+=============
+Configuration
+=============
 
 Configuration files allow you to set default parameters for all vise operations.
 
@@ -156,5 +157,5 @@ See Also
 ========
 
 - :doc:`installation` - POTCAR configuration
-- :doc:`cli_reference` - Command line options
+- :doc:`cli_commands` - Command line options
 - :doc:`troubleshooting` - Configuration issues

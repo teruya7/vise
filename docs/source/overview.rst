@@ -1,6 +1,6 @@
-=====================
-Introduction of vise
-=====================
+========
+Overview
+========
 
 .. contents:: Table of Contents
    :local:
@@ -57,7 +57,7 @@ Usage Modes
     # Get structure from Materials Project
     vise gp -m mp-149
 
-See :doc:`cli_reference` for complete command documentation.
+See :doc:`cli_commands` for complete command documentation.
 
 **Python API**
 
@@ -72,7 +72,7 @@ See :doc:`cli_reference` for complete command documentation.
     # Analyze results
     result = band.analyze_band("vasprun.xml", "KPOINTS")
 
-See :doc:`vise_api` for complete API documentation.
+See :doc:`python_api` for complete API documentation.
 
 Quick Start
 -----------
@@ -80,9 +80,9 @@ Quick Start
 1. Install vise: ``pip install vise``
 2. Configure POTCAR: See :doc:`installation`
 3. Follow the tutorials:
-   - :doc:`tutorial_preparation_poscar`
-   - :doc:`tutorial_input_set`
-   - :doc:`tutorial_properties`
+   - :doc:`preparing_structures`
+   - :doc:`generating_inputs`
+   - :doc:`band_dos`
 
 **Note: Units used in vise are eV for energy and Å for length
 following the VASP convention.**

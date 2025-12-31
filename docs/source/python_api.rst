@@ -1,5 +1,6 @@
-Tutorial -- vise API
----------------------------------
+==========
+Python API
+==========
 
 In this tutorial, we show how to use vise in the python program.
 

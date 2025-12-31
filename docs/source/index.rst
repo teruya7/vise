@@ -1,44 +1,46 @@
-.. vise documentation master file, created by
-   sphinx-quickstart on Wed Mar  4 18:16:35 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. vise documentation master file
 
-Welcome to vise's documentation!
-================================
+vise Documentation
+==================
 
 VISE (VASP Integrated Supporting Environment) is a Python package that helps
-VASP users prepare input files, handle calculation errors, and analyze results.
+VASP users prepare input files and analyze calculation results.
 
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started
 
-   introduction
+   overview
    installation
 
 .. toctree::
    :maxdepth: 2
-   :caption: Tutorials
+   :caption: Basic Usage
 
-   tutorial_preparation_poscar
-   tutorial_input_set
-   tutorial_properties
-   tutorial_vise_yaml
+   preparing_structures
+   generating_inputs
+   configuration
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Analysis
+
+   band_dos
+   dielectric_effective_mass
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Guides
+
    workflows
+   troubleshooting
 
 .. toctree::
    :maxdepth: 2
    :caption: Reference
 
-   cli_reference
-   vise_api
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Help
-
-   troubleshooting
-   change_log
+   cli_commands
+   python_api
    citation
 
 Indices and tables

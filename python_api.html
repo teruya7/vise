@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python API &mdash; vise  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c090c526" />
+
+  
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Citation" href="citation.html" />
+    <link rel="prev" title="CLI Commands" href="cli_commands.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #0a1628" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            vise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#usage-modes">Usage Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#potcar-configuration">POTCAR Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-dependencies">Optional Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#boltztrap2-effective-mass">BoltzTraP2 (Effective Mass)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#phonopy-phonon-calculations">Phonopy (Phonon Calculations)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#materials-project-api">Materials Project API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verification">Verification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#quick-test">Quick Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#troubleshooting-installation">Troubleshooting Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#potcar-not-found">POTCAR Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#import-errors">Import Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#boltztrap2-issues">BoltzTraP2 Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Basic Usage</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preparing_structures.html">Preparing Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#getting-poscar-from-materials-project">Getting POSCAR from Materials Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preparing_structures.html#command-line">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preparing_structures.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#checking-structure-symmetry">Checking Structure Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="generating_inputs.html">Generating VASP Inputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#input-files-for-cell-relaxation">Input Files for Cell Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#xc-functionals">XC Functionals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#potcar-files">POTCAR Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#kpoints-files">KPOINTS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#command-options">Command Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generating_inputs.html#prev-dir">–prev_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generating_inputs.html#options">–options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generating_inputs.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-file-location">Configuration File Location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#basic-configuration">Basic Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#potcar-override">POTCAR Override</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#xc-functional-default">XC Functional Default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#incar-settings">INCAR Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#available-options">Available Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#complete-example">Complete Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#priority-order">Priority Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="band_dos.html">Band Structure &amp; DOS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#band-structure">Band Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#command-line">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#density-of-states">Density of States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#id1">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#id2">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#band-edge-properties">Band Edge Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dielectric_effective_mass.html">Dielectric Function &amp; Effective Mass</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dielectric_effective_mass.html#dielectric-function">Dielectric Function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#command-line">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dielectric_effective_mass.html#effective-mass">Effective Mass</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#id1">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#id2">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dielectric_effective_mass.html#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Workflow Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#structure-optimization-workflow">Structure Optimization Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-prepare-structure">Step 1: Prepare Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-check-symmetry">Step 2: Check Symmetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-generate-input-files">Step 3: Generate Input Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-4-run-vasp">Step 4: Run VASP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-5-check-results">Step 5: Check Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#band-structure-calculation">Band Structure Calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-prepare-from-relaxed-structure">Step 1: Prepare from Relaxed Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-generate-band-calculation-inputs">Step 2: Generate Band Calculation Inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-run-vasp-and-plot">Step 3: Run VASP and Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#dos-calculation">DOS Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#hse-calculation-workflow">HSE Calculation Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-pbe-pre-relaxation">Step 1: PBE Pre-relaxation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-hse-optimization">Step 2: HSE Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-hse-band-structure">Step 3: HSE Band Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#dielectric-function-calculation">Dielectric Function Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#phonon-calculation-workflow">Phonon Calculation Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-create-supercell">Step 1: Create Supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-run-force-calculation">Step 2: Run Force Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-create-phonon-band-plot">Step 3: Create Phonon Band Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#python-api-workflow">Python API Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#high-throughput-example">High-Throughput Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#installation-issues">Installation Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#potcar-not-found">POTCAR Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#boltztrap2-import-error">BoltzTraP2 Import Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#materials-project-api-key">Materials Project API Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#input-generation-issues">Input Generation Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#wrong-potcar-selected">Wrong POTCAR Selected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#kpoints-not-gamma-centered">KPOINTS Not Gamma-Centered</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#symmetry-detection-issues">Symmetry Detection Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#analysis-issues">Analysis Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#band-gap-shows-zero">Band Gap Shows Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#band-structure-plot-missing-symmetry-points">Band Structure Plot Missing Symmetry Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#dos-shows-unexpected-gaps">DOS Shows Unexpected Gaps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#vasp-calculation-issues">VASP Calculation Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#vasp-crashes-with-kpar">VASP Crashes with KPAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#slow-hse-calculations">Slow HSE Calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#memory-issues">Memory Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#configuration-issues">Configuration Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#vise-yaml-not-being-read">vise.yaml Not Being Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#priority-order">Priority Order</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#getting-help">Getting Help</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cli_commands.html">CLI Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#command-summary">Command Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#input-generation-commands">Input Generation Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#vasp-set-vs">vasp_set (vs)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#structure-commands">Structure Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#structure-info-si">structure_info (si)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#get-poscar-gp">get_poscar (gp)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#analysis-commands">Analysis Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#plot-band-pb">plot_band (pb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#plot-dos-pd">plot_dos (pd)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#plot-diele-func-pdf">plot_diele_func (pdf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#band-edge-be">band_edge (be)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#effective-mass-em">effective_mass (em)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#make-atom-poscars-map">make_atom_poscars (map)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#make-phonon-poscars-mpp">make_phonon_poscars (mpp)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#make-phonon-figs-mpf">make_phonon_figs (mpf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#spin-decomposed-volumetric-files-sdvf">spin_decomposed_volumetric_files (sdvf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#light-weight-vol-data-lwvd">light_weight_vol_data (lwvd)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#quick-start-with-vise-api">Quick Start with vise.api</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#structure-analysis">Structure Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vasp-input-generation">VASP Input Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#band-structure-analysis">Band Structure Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dos-analysis">DOS Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dielectric-function-analysis">Dielectric Function Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#band-edge-properties">Band Edge Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#effective-mass-calculation">Effective Mass Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#materials-project-integration">Materials Project Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utility-functions">Utility Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#legacy-api-low-level">Legacy API (Low-level)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#fireworks-integration">FireWorks Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#api-reference">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-structure">vise.api.structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_symmetry_info"><code class="docutils literal notranslate"><span class="pre">get_symmetry_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_primitive"><code class="docutils literal notranslate"><span class="pre">get_primitive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_conventional"><code class="docutils literal notranslate"><span class="pre">get_conventional()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-vasp-inputs">vise.api.vasp_inputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create_vasp_set"><code class="docutils literal notranslate"><span class="pre">create_vasp_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_available_tasks"><code class="docutils literal notranslate"><span class="pre">get_available_tasks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_available_xc"><code class="docutils literal notranslate"><span class="pre">get_available_xc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-band">vise.api.band</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analyze_band"><code class="docutils literal notranslate"><span class="pre">analyze_band()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-dos">vise.api.dos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analyze_dos"><code class="docutils literal notranslate"><span class="pre">analyze_dos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-dielectric">vise.api.dielectric</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analyze_dielectric"><code class="docutils literal notranslate"><span class="pre">analyze_dielectric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#load_dielectric_from_csv"><code class="docutils literal notranslate"><span class="pre">load_dielectric_from_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-band-edge">vise.api.band_edge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#get_band_edge_properties"><code class="docutils literal notranslate"><span class="pre">get_band_edge_properties()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate_effective_mass"><code class="docutils literal notranslate"><span class="pre">calculate_effective_mass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-materials-project">vise.api.materials_project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#search_materials"><code class="docutils literal notranslate"><span class="pre">search_materials()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_structure_by_id"><code class="docutils literal notranslate"><span class="pre">get_structure_by_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#get_most_stable_structure"><code class="docutils literal notranslate"><span class="pre">get_most_stable_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vise-api-util">vise.api.util</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#make_atom_poscars"><code class="docutils literal notranslate"><span class="pre">make_atom_poscars()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create_phonon_setup"><code class="docutils literal notranslate"><span class="pre">create_phonon_setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analyze_phonon"><code class="docutils literal notranslate"><span class="pre">analyze_phonon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make_spin_decomposed_volumetric_files"><code class="docutils literal notranslate"><span class="pre">make_spin_decomposed_volumetric_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make_light_weight_volumetric_data"><code class="docutils literal notranslate"><span class="pre">make_light_weight_volumetric_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citation.html#primary-reference">Primary Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citation.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citation.html#additional-citations">Additional Citations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #0a1628" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">vise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Python API</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kumagai-group/vise/blob/master/docs/source/python_api.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="python-api">
+<h1>Python API<a class="headerlink" href="#python-api" title="Link to this heading">¶</a></h1>
+<p>In this tutorial, we show how to use vise in the python program.</p>
+</section>
+<section id="quick-start-with-vise-api">
+<h1>Quick Start with vise.api<a class="headerlink" href="#quick-start-with-vise-api" title="Link to this heading">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">vise.api</span></code> module provides a clean Python API for all vise functionality.</p>
+<section id="structure-analysis">
+<h2>Structure Analysis<a class="headerlink" href="#structure-analysis" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pymatgen.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">structure</span>
+
+<span class="c1"># Load a structure</span>
+<span class="n">struct</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get symmetry information</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">get_symmetry_info</span><span class="p">(</span><span class="n">struct</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Space group: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">space_group_symbol</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">space_group_number</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Crystal system: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">crystal_system</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Point group: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">point_group</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bravais lattice: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">bravais_lattice</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Volume: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">volume</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> Å³&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get primitive cell</span>
+<span class="n">primitive</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">get_primitive</span><span class="p">(</span><span class="n">struct</span><span class="p">)</span>
+<span class="n">primitive</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;POSCAR_primitive&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get conventional cell</span>
+<span class="n">conventional</span> <span class="o">=</span> <span class="n">structure</span><span class="o">.</span><span class="n">get_conventional</span><span class="p">(</span><span class="n">struct</span><span class="p">)</span>
+<span class="n">conventional</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;POSCAR_conventional&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="vasp-input-generation">
+<h2>VASP Input Generation<a class="headerlink" href="#vasp-input-generation" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pymatgen.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">vasp_inputs</span>
+
+<span class="c1"># Load structure</span>
+<span class="n">struct</span> <span class="o">=</span> <span class="n">Structure</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create VASP input set for structure optimization</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">vasp_inputs</span><span class="o">.</span><span class="n">create_vasp_set</span><span class="p">(</span>
+    <span class="n">struct</span><span class="p">,</span>
+    <span class="n">task</span><span class="o">=</span><span class="s2">&quot;structure_opt&quot;</span><span class="p">,</span>  <span class="c1"># or Task.structure_opt</span>
+    <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;pbe&quot;</span><span class="p">,</span>              <span class="c1"># or Xc.pbe</span>
+<span class="p">)</span>
+
+<span class="c1"># Write input files to directory</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;./relax&quot;</span><span class="p">)</span>
+
+<span class="c1"># Available tasks and XC functionals</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tasks:&quot;</span><span class="p">,</span> <span class="n">vasp_inputs</span><span class="o">.</span><span class="n">get_available_tasks</span><span class="p">())</span>
+<span class="c1"># [&#39;structure_opt&#39;, &#39;band&#39;, &#39;dos&#39;, &#39;defect&#39;, ...]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;XC:&quot;</span><span class="p">,</span> <span class="n">vasp_inputs</span><span class="o">.</span><span class="n">get_available_xc</span><span class="p">())</span>
+<span class="c1"># [&#39;pbe&#39;, &#39;pbesol&#39;, &#39;hse&#39;, &#39;scan&#39;, ...]</span>
+
+<span class="c1"># Custom INCAR settings</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">vasp_inputs</span><span class="o">.</span><span class="n">create_vasp_set</span><span class="p">(</span>
+    <span class="n">struct</span><span class="p">,</span>
+    <span class="n">task</span><span class="o">=</span><span class="s2">&quot;band&quot;</span><span class="p">,</span>
+    <span class="n">xc</span><span class="o">=</span><span class="s2">&quot;hse&quot;</span><span class="p">,</span>
+    <span class="n">user_incar_settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;EDIFF&quot;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="s2">&quot;NELM&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;./band&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="band-structure-analysis">
+<h2>Band Structure Analysis<a class="headerlink" href="#band-structure-analysis" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">band</span>
+
+<span class="c1"># Analyze band structure from VASP output</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">band</span><span class="o">.</span><span class="n">analyze_band</span><span class="p">(</span><span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;KPOINTS&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if metallic</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">is_metal</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;System is metallic&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Band gap: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">band_gap</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VBM: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">vbm</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CBM: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cbm</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save plot</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;band.pdf&quot;</span><span class="p">,</span> <span class="n">energy_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Save data as JSON</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="s2">&quot;band_data.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dos-analysis">
+<h2>DOS Analysis<a class="headerlink" href="#dos-analysis" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">dos</span>
+
+<span class="c1"># Analyze DOS from VASP output</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">dos</span><span class="o">.</span><span class="n">analyze_dos</span><span class="p">(</span><span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Band gap: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">band_gap</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fermi energy: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">efermi</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save plot</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;dos.pdf&quot;</span><span class="p">,</span> <span class="n">energy_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Save data</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="s2">&quot;dos_data.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dielectric-function-analysis">
+<h2>Dielectric Function Analysis<a class="headerlink" href="#dielectric-function-analysis" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">dielectric</span>
+
+<span class="c1"># Analyze dielectric function</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">dielectric</span><span class="o">.</span><span class="n">analyze_dielectric</span><span class="p">(</span><span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save plots for different components</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;absorption.pdf&quot;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s2">&quot;absorption_coeff&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;real.pdf&quot;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s2">&quot;real&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_plot</span><span class="p">(</span><span class="s2">&quot;imag.pdf&quot;</span><span class="p">,</span> <span class="n">plot_type</span><span class="o">=</span><span class="s2">&quot;imag&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save data</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="s2">&quot;diele_func.json&quot;</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_csv</span><span class="p">(</span><span class="s2">&quot;diele_func.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load from CSV</span>
+<span class="n">loaded</span> <span class="o">=</span> <span class="n">dielectric</span><span class="o">.</span><span class="n">load_dielectric_from_csv</span><span class="p">(</span><span class="s2">&quot;diele_func.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="band-edge-properties">
+<h2>Band Edge Properties<a class="headerlink" href="#band-edge-properties" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">band_edge</span>
+
+<span class="c1"># Get band edge properties</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">band_edge</span><span class="o">.</span><span class="n">get_band_edge_properties</span><span class="p">(</span><span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">is_metal</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Metallic (Fermi: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">efermi</span><span class="si">}</span><span class="s2"> eV)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Band gap: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">band_gap</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Type: </span><span class="si">{</span><span class="s1">&#39;direct&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">result</span><span class="o">.</span><span class="n">is_direct</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;indirect&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;VBM: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">vbm_info</span><span class="o">.</span><span class="n">energy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV at </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">vbm_info</span><span class="o">.</span><span class="n">kpoint_coords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CBM: </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cbm_info</span><span class="o">.</span><span class="n">energy</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> eV at </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">cbm_info</span><span class="o">.</span><span class="n">kpoint_coords</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="effective-mass-calculation">
+<h2>Effective Mass Calculation<a class="headerlink" href="#effective-mass-calculation" title="Link to this heading">¶</a></h2>
+<p>Requires BoltzTrap2 to be installed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">band_edge</span>
+
+<span class="c1"># Calculate effective mass</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">band_edge</span><span class="o">.</span><span class="n">calculate_effective_mass</span><span class="p">(</span>
+    <span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;OUTCAR&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span>
+    <span class="n">concentrations</span><span class="o">=</span><span class="p">[</span><span class="mf">1e18</span><span class="p">,</span> <span class="mf">1e19</span><span class="p">,</span> <span class="mf">1e20</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">save_json</span><span class="p">(</span><span class="s2">&quot;effective_mass.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="materials-project-integration">
+<h2>Materials Project Integration<a class="headerlink" href="#materials-project-integration" title="Link to this heading">¶</a></h2>
+<p>Requires Materials Project API key configured in ~/.pmgrc.yaml.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">materials_project</span>
+
+<span class="c1"># Search for materials by formula</span>
+<span class="n">entries</span> <span class="o">=</span> <span class="n">materials_project</span><span class="o">.</span><span class="n">search_materials</span><span class="p">(</span><span class="s2">&quot;TiO2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">material_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">space_group</span><span class="si">}</span><span class="s2">, Eg=</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">band_gap</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get structure by Materials Project ID</span>
+<span class="n">struct</span> <span class="o">=</span> <span class="n">materials_project</span><span class="o">.</span><span class="n">get_structure_by_id</span><span class="p">(</span><span class="s2">&quot;mp-149&quot;</span><span class="p">,</span> <span class="n">save_poscar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get most stable structure for a formula</span>
+<span class="n">struct</span> <span class="o">=</span> <span class="n">materials_project</span><span class="o">.</span><span class="n">get_most_stable_structure</span><span class="p">(</span><span class="s2">&quot;LiFePO4&quot;</span><span class="p">,</span> <span class="n">save_poscar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get detailed material info</span>
+<span class="n">info</span> <span class="o">=</span> <span class="n">materials_project</span><span class="o">.</span><span class="n">get_material_info</span><span class="p">(</span><span class="s2">&quot;mp-149&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Band gap: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">band_gap</span><span class="si">}</span><span class="s2"> eV&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Magnetization: </span><span class="si">{</span><span class="n">info</span><span class="o">.</span><span class="n">total_magnetization</span><span class="si">}</span><span class="s2"> μB&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="utility-functions">
+<h2>Utility Functions<a class="headerlink" href="#utility-functions" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">vise.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">util</span>
+
+<span class="c1"># Create atom POSCARs for reference calculations</span>
+<span class="n">util</span><span class="o">.</span><span class="n">make_atom_poscars</span><span class="p">([</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span> <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;./atoms&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create phonon calculation setup</span>
+<span class="n">setup</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">create_phonon_setup</span><span class="p">(</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">output_dir</span><span class="o">=</span><span class="s2">&quot;./phonon&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Supercell atoms: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">setup</span><span class="o">.</span><span class="n">supercell</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Analyze phonon results</span>
+<span class="n">util</span><span class="o">.</span><span class="n">analyze_phonon</span><span class="p">(</span><span class="s2">&quot;phonopy_input.json&quot;</span><span class="p">,</span> <span class="s2">&quot;vasprun.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;phonon_band.pdf&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create spin-decomposed volumetric files</span>
+<span class="n">up</span><span class="p">,</span> <span class="n">down</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">make_spin_decomposed_volumetric_files</span><span class="p">(</span><span class="s2">&quot;CHGCAR&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create lightweight volumetric data</span>
+<span class="n">util</span><span class="o">.</span><span class="n">make_light_weight_volumetric_data</span><span class="p">(</span><span class="s2">&quot;CHGCAR&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="legacy-api-low-level">
+<h1>Legacy API (Low-level)<a class="headerlink" href="#legacy-api-low-level" title="Link to this heading">¶</a></h1>
+<p>For more fine-grained control, you can use the lower-level API directly.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pymatgen.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">Lattice</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.input_set.input_options</span><span class="w"> </span><span class="kn">import</span> <span class="n">CategorizedInputOptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.input_set.vasp_input_files</span><span class="w"> </span><span class="kn">import</span> <span class="n">VaspInputFiles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.input_set.task</span><span class="w"> </span><span class="kn">import</span> <span class="n">Task</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.input_set.xc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Xc</span>
+
+<span class="n">structure</span> <span class="o">=</span> <span class="n">Structure</span><span class="p">(</span><span class="n">Lattice</span><span class="o">.</span><span class="n">cubic</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="n">categorized_input_options</span> <span class="o">=</span> <span class="n">CategorizedInputOptions</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span>
+            <span class="n">task</span><span class="o">=</span><span class="n">Task</span><span class="o">.</span><span class="n">band</span><span class="p">,</span>
+            <span class="n">xc</span><span class="o">=</span><span class="n">Xc</span><span class="o">.</span><span class="n">pbe</span><span class="p">,</span>
+            <span class="n">overridden_potcar</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Mg&quot;</span><span class="p">:</span> <span class="s2">&quot;Mg_pv&quot;</span><span class="p">})</span>
+
+<span class="n">input_files</span> <span class="o">=</span> <span class="n">VaspInputFiles</span><span class="p">(</span><span class="n">categorized_input_options</span><span class="p">,</span> <span class="n">overridden_incar_settings</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;NSW&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">})</span>
+<span class="n">input_files</span><span class="o">.</span><span class="n">create_input_files</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The CategorizedInputOptions class constructor takes the keyword arguments that
+are arguments of
+<a class="reference external" href="https://github.com/kumagai-group/vise/blob/master/vise/input_set/potcar_generator.py">generate_potcar</a>,
+<a class="reference external" href="https://github.com/kumagai-group/vise/blob/master/vise/input_set/incar_settings_generator.py">IncarSettingsGenerator</a>,
+and <a class="reference external" href="https://github.com/kumagai-group/vise/blob/master/vise/input_set/structure_kpoints_generator.py">StructureKpointsGenerator</a>,
+An example is overridden_potcar shown above.</p>
+<p>The VaspInputFiles class constructor also takes the overridden_incar_settings, which can control the INCAR tags.</p>
+<p>Note also that the vise.yaml files are also parsed.</p>
+</section>
+<section id="fireworks-integration">
+<h1>FireWorks Integration<a class="headerlink" href="#fireworks-integration" title="Link to this heading">¶</a></h1>
+<p>Here, we show an example of FireTask in <a class="reference external" href="https://materialsproject.github.io/fireworks/index.html">FireWorks</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">fireworks</span><span class="w"> </span><span class="kn">import</span> <span class="n">FiretaskBase</span><span class="p">,</span> <span class="n">explicit_serialize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.input_set.input_options</span><span class="w"> </span><span class="kn">import</span> <span class="n">CategorizedInputOptions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">vise.input_set.vasp_input_files</span><span class="w"> </span><span class="kn">import</span> <span class="n">VaspInputFiles</span>
+
+<span class="nd">@explicit_serialize</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WriteVaspInputsTask</span><span class="p">(</span><span class="n">FiretaskBase</span><span class="p">):</span>
+
+    <span class="n">required_params</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">,</span> <span class="s2">&quot;xc&quot;</span><span class="p">]</span>
+    <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;input_options&quot;</span><span class="p">,</span> <span class="s2">&quot;overridden_incar_settings&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fw_spec</span><span class="p">):</span>
+        <span class="n">categorized_input_options</span> <span class="o">=</span> <span class="n">CategorizedInputOptions</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="n">fw_spec</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">],</span>
+            <span class="n">task</span><span class="o">=</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;task&quot;</span><span class="p">],</span>
+            <span class="n">xc</span><span class="o">=</span><span class="bp">self</span><span class="p">[</span><span class="s2">&quot;xc&quot;</span><span class="p">],</span>
+            <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;input_options&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+
+        <span class="n">input_files</span> <span class="o">=</span> <span class="n">VaspInputFiles</span><span class="p">(</span><span class="n">categorized_input_options</span><span class="p">,</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;overridden_incar_settings&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">input_files</span><span class="o">.</span><span class="n">create_input_files</span><span class="p">(</span><span class="n">dirname</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<section id="vise-api-structure">
+<h2>vise.api.structure<a class="headerlink" href="#vise-api-structure" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="get_symmetry_info">
+<span class="sig-name descname"><span class="pre">get_symmetry_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symprec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_symmetry_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get symmetry information for a structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>structure</strong> – pymatgen Structure object</p></li>
+<li><p><strong>symprec</strong> – Length tolerance for symmetry (Å)</p></li>
+<li><p><strong>angle_tolerance</strong> – Angle tolerance (degrees)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>SymmetryInfo dataclass</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_primitive">
+<span class="sig-name descname"><span class="pre">get_primitive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symprec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_primitive" title="Link to this definition">¶</a></dt>
+<dd><p>Get primitive cell of a structure.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_conventional">
+<span class="sig-name descname"><span class="pre">get_conventional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symprec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">angle_tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_conventional" title="Link to this definition">¶</a></dt>
+<dd><p>Get conventional cell of a structure.</p>
+</dd></dl>
+
+</section>
+<section id="vise-api-vasp-inputs">
+<h2>vise.api.vasp_inputs<a class="headerlink" href="#vise-api-vasp-inputs" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="create_vasp_set">
+<span class="sig-name descname"><span class="pre">create_vasp_set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">structure</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task=&quot;structure_opt&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xc=&quot;pbe&quot;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#create_vasp_set" title="Link to this definition">¶</a></dt>
+<dd><p>Create VASP input set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>structure</strong> – pymatgen Structure</p></li>
+<li><p><strong>task</strong> – Task name (string or Task enum)</p></li>
+<li><p><strong>xc</strong> – XC functional (string or Xc enum)</p></li>
+<li><p><strong>kpt_density</strong> – K-point density (Å)</p></li>
+<li><p><strong>user_incar_settings</strong> – Dict of INCAR overrides</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>VaspInputSet object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_available_tasks">
+<span class="sig-name descname"><span class="pre">get_available_tasks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_available_tasks" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of available task types.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_available_xc">
+<span class="sig-name descname"><span class="pre">get_available_xc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get_available_xc" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of available XC functionals.</p>
+</dd></dl>
+
+</section>
+<section id="vise-api-band">
+<h2>vise.api.band<a class="headerlink" href="#vise-api-band" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="analyze_band">
+<span class="sig-name descname"><span class="pre">analyze_band</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vasprun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpoints</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'KPOINTS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyze_band" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze band structure from VASP output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BandAnalysisResult with band_gap, vbm, cbm, is_metal</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="vise-api-dos">
+<h2>vise.api.dos<a class="headerlink" href="#vise-api-dos" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="analyze_dos">
+<span class="sig-name descname"><span class="pre">analyze_dos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vasprun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OUTCAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyze_dos" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze DOS from VASP output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DosAnalysisResult with band_gap, vbm, cbm, efermi, is_metal</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="vise-api-dielectric">
+<h2>vise.api.dielectric<a class="headerlink" href="#vise-api-dielectric" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="analyze_dielectric">
+<span class="sig-name descname"><span class="pre">analyze_dielectric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vasprun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OUTCAR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_vasp_real</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyze_dielectric" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze dielectric function from VASP output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DielectricAnalysisResult</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="load_dielectric_from_csv">
+<span class="sig-name descname"><span class="pre">load_dielectric_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#load_dielectric_from_csv" title="Link to this definition">¶</a></dt>
+<dd><p>Load dielectric data from CSV file.</p>
+</dd></dl>
+
+</section>
+<section id="vise-api-band-edge">
+<h2>vise.api.band_edge<a class="headerlink" href="#vise-api-band-edge" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="get_band_edge_properties">
+<span class="sig-name descname"><span class="pre">get_band_edge_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vasprun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OUTCAR'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_band_edge_properties" title="Link to this definition">¶</a></dt>
+<dd><p>Get band edge properties (VBM, CBM).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>BandEdgeResult</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_effective_mass">
+<span class="sig-name descname"><span class="pre">calculate_effective_mass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vasprun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outcar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">300.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concentrations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_effective_mass" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate effective mass using BoltzTrap2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EffectiveMassResult</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="vise-api-materials-project">
+<h2>vise.api.materials_project<a class="headerlink" href="#vise-api-materials-project" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="search_materials">
+<span class="sig-name descname"><span class="pre">search_materials</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#search_materials" title="Link to this definition">¶</a></dt>
+<dd><p>Search Materials Project by formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of MaterialEntry</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_structure_by_id">
+<span class="sig-name descname"><span class="pre">get_structure_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">material_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_poscar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_structure_by_id" title="Link to this definition">¶</a></dt>
+<dd><p>Get structure from Materials Project by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pymatgen Structure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="get_most_stable_structure">
+<span class="sig-name descname"><span class="pre">get_most_stable_structure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_poscar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_most_stable_structure" title="Link to this definition">¶</a></dt>
+<dd><p>Get most stable structure for a formula.</p>
+</dd></dl>
+
+</section>
+<section id="vise-api-util">
+<h2>vise.api.util<a class="headerlink" href="#vise-api-util" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="make_atom_poscars">
+<span class="sig-name descname"><span class="pre">make_atom_poscars</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#make_atom_poscars" title="Link to this definition">¶</a></dt>
+<dd><p>Create POSCARs for isolated atom calculations.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="create_phonon_setup">
+<span class="sig-name descname"><span class="pre">create_phonon_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unitcell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">supercell_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#create_phonon_setup" title="Link to this definition">¶</a></dt>
+<dd><p>Create phonon calculation setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>PhonopySetup</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="analyze_phonon">
+<span class="sig-name descname"><span class="pre">analyze_phonon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phonopy_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vasprun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analyze_phonon" title="Link to this definition">¶</a></dt>
+<dd><p>Analyze phonon calculation and create plot.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="make_spin_decomposed_volumetric_files">
+<span class="sig-name descname"><span class="pre">make_spin_decomposed_volumetric_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chgcar_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#make_spin_decomposed_volumetric_files" title="Link to this definition">¶</a></dt>
+<dd><p>Create spin-up and spin-down volumetric files.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="make_light_weight_volumetric_data">
+<span class="sig-name descname"><span class="pre">make_light_weight_volumetric_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volumetric_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#make_light_weight_volumetric_data" title="Link to this definition">¶</a></dt>
+<dd><p>Create lightweight volumetric data file.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cli_commands.html" class="btn btn-neutral float-left" title="CLI Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="citation.html" class="btn btn-neutral float-right" title="Citation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Yu Kumagai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

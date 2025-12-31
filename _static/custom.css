@@ -1,0 +1,278 @@
+/* vise Documentation - Clean & Simple Theme */
+
+/* ======================================
+   Simple Color Palette - High Readability
+   ====================================== */
+:root {
+    --primary: #2980b9;
+    --primary-dark: #1a5276;
+    --primary-light: #3498db;
+    --bg-sidebar: #343a40;
+    --bg-main: #ffffff;
+    --bg-code: #f8f9fa;
+    --text-main: #212529;
+    --text-light: #6c757d;
+    --text-white: #ffffff;
+    --border: #dee2e6;
+    --link: #2980b9;
+    --link-hover: #1a5276;
+}
+
+/* ======================================
+   Sidebar - Clean Dark Style
+   ====================================== */
+.wy-nav-side {
+    background: var(--bg-sidebar);
+}
+
+.wy-side-nav-search {
+    background: var(--primary-dark);
+}
+
+.wy-side-nav-search input[type="text"] {
+    border-radius: 4px;
+}
+
+.wy-menu-vertical a {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.wy-menu-vertical a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+}
+
+.wy-menu-vertical li.current > a {
+    background: var(--primary);
+    color: var(--text-white);
+}
+
+.wy-menu-vertical li.toctree-l1.current > a {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+}
+
+.wy-menu-vertical li.toctree-l2.current > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
+    background: transparent;
+}
+
+.wy-menu-vertical li.current a:hover {
+    background: var(--primary-light);
+}
+
+/* Caption (section headers in sidebar) */
+.wy-menu-vertical p.caption {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    margin-top: 1em;
+    padding: 0.5em 1.25em;
+}
+
+/* ======================================
+   Main Content - Light & Readable
+   ====================================== */
+.wy-nav-content-wrap {
+    background: #f5f5f5;
+}
+
+.wy-nav-content {
+    background: var(--bg-main);
+    max-width: 900px;
+    padding: 2em 3em;
+}
+
+.rst-content {
+    color: var(--text-main);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* ======================================
+   Typography - Clear & Readable
+   ====================================== */
+h1, h2, h3, h4, h5, h6,
+.rst-content h1, .rst-content h2, .rst-content h3,
+.rst-content h4, .rst-content h5, .rst-content h6 {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.rst-content h1 {
+    font-size: 2em;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
+}
+
+.rst-content h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3em;
+    margin-top: 1.5em;
+}
+
+.rst-content h3 {
+    font-size: 1.25em;
+    margin-top: 1.3em;
+}
+
+a {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* ======================================
+   Code Blocks - Clean Style
+   ====================================== */
+.rst-content code,
+.rst-content tt,
+code {
+    background: var(--bg-code);
+    color: #c7254e;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+}
+
+.rst-content pre {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1em;
+    overflow-x: auto;
+}
+
+.rst-content pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--text-main);
+}
+
+.highlight {
+    background: var(--bg-code);
+}
+
+/* ======================================
+   Tables - Simple & Clean
+   ====================================== */
+.rst-content table.docutils {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.rst-content table.docutils th {
+    background: var(--bg-code);
+    color: var(--text-main);
+    font-weight: 600;
+    border: 1px solid var(--border);
+    padding: 10px 15px;
+    text-align: left;
+}
+
+.rst-content table.docutils td {
+    border: 1px solid var(--border);
+    padding: 8px 15px;
+}
+
+.rst-content table.docutils tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+/* ======================================
+   Lists
+   ====================================== */
+.rst-content ul, .rst-content ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+}
+
+.rst-content li {
+    margin-bottom: 0.5em;
+}
+
+/* ======================================
+   Admonitions (Note, Warning, etc.)
+   ====================================== */
+.rst-content .admonition {
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 4px;
+}
+
+.rst-content .note {
+    background: #e7f3fe;
+    border-left: 4px solid var(--primary);
+}
+
+.rst-content .warning {
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+.rst-content .admonition-title {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+/* ======================================
+   Table of Contents (local)
+   ====================================== */
+.rst-content .contents.local {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1em 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.rst-content .contents.local p.topic-title {
+    font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+/* ======================================
+   Breadcrumbs
+   ====================================== */
+.wy-breadcrumbs {
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ======================================
+   Footer
+   ====================================== */
+footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+}
+
+/* ======================================
+   Mobile
+   ====================================== */
+@media screen and (max-width: 768px) {
+    .wy-nav-content {
+        padding: 1em;
+    }
+    
+    .rst-content {
+        font-size: 15px;
+    }
+}

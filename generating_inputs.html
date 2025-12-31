@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generating VASP Inputs &mdash; vise  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c090c526" />
+
+  
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Preparing Structures" href="preparing_structures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #0a1628" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            vise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#key-features">Key Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#usage-modes">Usage Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#basic-installation">Basic Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#potcar-configuration">POTCAR Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#optional-dependencies">Optional Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#boltztrap2-effective-mass">BoltzTraP2 (Effective Mass)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#phonopy-phonon-calculations">Phonopy (Phonon Calculations)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#materials-project-api">Materials Project API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#verification">Verification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#quick-test">Quick Test</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#troubleshooting-installation">Troubleshooting Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#potcar-not-found">POTCAR Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#import-errors">Import Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="installation.html#boltztrap2-issues">BoltzTraP2 Issues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Basic Usage</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="preparing_structures.html">Preparing Structures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#getting-poscar-from-materials-project">Getting POSCAR from Materials Project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="preparing_structures.html#command-line">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="preparing_structures.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#checking-structure-symmetry">Checking Structure Symmetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preparing_structures.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Generating VASP Inputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#input-files-for-cell-relaxation">Input Files for Cell Relaxation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tasks">Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xc-functionals">XC Functionals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#potcar-files">POTCAR Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kpoints-files">KPOINTS Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#command-options">Command Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prev-dir">–prev_dir</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">–options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-file-location">Configuration File Location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#basic-configuration">Basic Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#potcar-override">POTCAR Override</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#xc-functional-default">XC Functional Default</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html#incar-settings">INCAR Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#available-options">Available Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#complete-example">Complete Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#priority-order">Priority Order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysis</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="band_dos.html">Band Structure &amp; DOS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#band-structure">Band Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#command-line">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#density-of-states">Density of States</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#id1">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="band_dos.html#id2">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#band-edge-properties">Band Edge Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="band_dos.html#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dielectric_effective_mass.html">Dielectric Function &amp; Effective Mass</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dielectric_effective_mass.html#dielectric-function">Dielectric Function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#command-line">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#python-api">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dielectric_effective_mass.html#effective-mass">Effective Mass</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#id1">Command Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dielectric_effective_mass.html#id2">Python API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dielectric_effective_mass.html#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workflows.html">Workflow Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#structure-optimization-workflow">Structure Optimization Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-prepare-structure">Step 1: Prepare Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-check-symmetry">Step 2: Check Symmetry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-generate-input-files">Step 3: Generate Input Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-4-run-vasp">Step 4: Run VASP</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-5-check-results">Step 5: Check Results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#band-structure-calculation">Band Structure Calculation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-prepare-from-relaxed-structure">Step 1: Prepare from Relaxed Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-generate-band-calculation-inputs">Step 2: Generate Band Calculation Inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-run-vasp-and-plot">Step 3: Run VASP and Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#dos-calculation">DOS Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#hse-calculation-workflow">HSE Calculation Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-pbe-pre-relaxation">Step 1: PBE Pre-relaxation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-hse-optimization">Step 2: HSE Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-hse-band-structure">Step 3: HSE Band Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#dielectric-function-calculation">Dielectric Function Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#phonon-calculation-workflow">Phonon Calculation Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-1-create-supercell">Step 1: Create Supercell</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-2-run-force-calculation">Step 2: Run Force Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#step-3-create-phonon-band-plot">Step 3: Create Phonon Band Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="workflows.html#python-api-workflow">Python API Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="workflows.html#high-throughput-example">High-Throughput Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#installation-issues">Installation Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#potcar-not-found">POTCAR Not Found</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#boltztrap2-import-error">BoltzTraP2 Import Error</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#materials-project-api-key">Materials Project API Key</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#input-generation-issues">Input Generation Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#wrong-potcar-selected">Wrong POTCAR Selected</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#kpoints-not-gamma-centered">KPOINTS Not Gamma-Centered</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#symmetry-detection-issues">Symmetry Detection Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#analysis-issues">Analysis Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#band-gap-shows-zero">Band Gap Shows Zero</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#band-structure-plot-missing-symmetry-points">Band Structure Plot Missing Symmetry Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#dos-shows-unexpected-gaps">DOS Shows Unexpected Gaps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#vasp-calculation-issues">VASP Calculation Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#vasp-crashes-with-kpar">VASP Crashes with KPAR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#slow-hse-calculations">Slow HSE Calculations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#memory-issues">Memory Issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#configuration-issues">Configuration Issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#vise-yaml-not-being-read">vise.yaml Not Being Read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html#priority-order">Priority Order</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#getting-help">Getting Help</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cli_commands.html">CLI Commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#command-summary">Command Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#input-generation-commands">Input Generation Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#vasp-set-vs">vasp_set (vs)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#structure-commands">Structure Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#structure-info-si">structure_info (si)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#get-poscar-gp">get_poscar (gp)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#analysis-commands">Analysis Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#plot-band-pb">plot_band (pb)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#plot-dos-pd">plot_dos (pd)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#plot-diele-func-pdf">plot_diele_func (pdf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#band-edge-be">band_edge (be)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#effective-mass-em">effective_mass (em)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cli_commands.html#utility-commands">Utility Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#make-atom-poscars-map">make_atom_poscars (map)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#make-phonon-poscars-mpp">make_phonon_poscars (mpp)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#make-phonon-figs-mpf">make_phonon_figs (mpf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#spin-decomposed-volumetric-files-sdvf">spin_decomposed_volumetric_files (sdvf)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli_commands.html#light-weight-vol-data-lwvd">light_weight_vol_data (lwvd)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html">Python API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html#quick-start-with-vise-api">Quick Start with vise.api</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#structure-analysis">Structure Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vasp-input-generation">VASP Input Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#band-structure-analysis">Band Structure Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#dos-analysis">DOS Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#dielectric-function-analysis">Dielectric Function Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#band-edge-properties">Band Edge Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#effective-mass-calculation">Effective Mass Calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#materials-project-integration">Materials Project Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#utility-functions">Utility Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html#legacy-api-low-level">Legacy API (Low-level)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html#fireworks-integration">FireWorks Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_api.html#api-reference">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-structure">vise.api.structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_symmetry_info"><code class="docutils literal notranslate"><span class="pre">get_symmetry_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_primitive"><code class="docutils literal notranslate"><span class="pre">get_primitive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_conventional"><code class="docutils literal notranslate"><span class="pre">get_conventional()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-vasp-inputs">vise.api.vasp_inputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#create_vasp_set"><code class="docutils literal notranslate"><span class="pre">create_vasp_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_available_tasks"><code class="docutils literal notranslate"><span class="pre">get_available_tasks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_available_xc"><code class="docutils literal notranslate"><span class="pre">get_available_xc()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-band">vise.api.band</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#analyze_band"><code class="docutils literal notranslate"><span class="pre">analyze_band()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-dos">vise.api.dos</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#analyze_dos"><code class="docutils literal notranslate"><span class="pre">analyze_dos()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-dielectric">vise.api.dielectric</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#analyze_dielectric"><code class="docutils literal notranslate"><span class="pre">analyze_dielectric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#load_dielectric_from_csv"><code class="docutils literal notranslate"><span class="pre">load_dielectric_from_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-band-edge">vise.api.band_edge</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_band_edge_properties"><code class="docutils literal notranslate"><span class="pre">get_band_edge_properties()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#calculate_effective_mass"><code class="docutils literal notranslate"><span class="pre">calculate_effective_mass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-materials-project">vise.api.materials_project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#search_materials"><code class="docutils literal notranslate"><span class="pre">search_materials()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_structure_by_id"><code class="docutils literal notranslate"><span class="pre">get_structure_by_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#get_most_stable_structure"><code class="docutils literal notranslate"><span class="pre">get_most_stable_structure()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="python_api.html#vise-api-util">vise.api.util</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#make_atom_poscars"><code class="docutils literal notranslate"><span class="pre">make_atom_poscars()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#create_phonon_setup"><code class="docutils literal notranslate"><span class="pre">create_phonon_setup()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#analyze_phonon"><code class="docutils literal notranslate"><span class="pre">analyze_phonon()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#make_spin_decomposed_volumetric_files"><code class="docutils literal notranslate"><span class="pre">make_spin_decomposed_volumetric_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_api.html#make_light_weight_volumetric_data"><code class="docutils literal notranslate"><span class="pre">make_light_weight_volumetric_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="citation.html">Citation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="citation.html#primary-reference">Primary Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citation.html#acknowledgments">Acknowledgments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="citation.html#additional-citations">Additional Citations</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #0a1628" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">vise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Generating VASP Inputs</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/kumagai-group/vise/blob/master/docs/source/generating_inputs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="generating-vasp-inputs">
+<h1>Generating VASP Inputs<a class="headerlink" href="#generating-vasp-inputs" title="Link to this heading">¶</a></h1>
+<p>This tutorial shows how to generate VASP input files.</p>
+<nav class="contents local" id="table-of-contents">
+<p class="topic-title">Table of Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#input-files-for-cell-relaxation" id="id101">Input Files for Cell Relaxation</a></p></li>
+<li><p><a class="reference internal" href="#tasks" id="id102">Tasks</a></p></li>
+<li><p><a class="reference internal" href="#xc-functionals" id="id103">XC Functionals</a></p></li>
+<li><p><a class="reference internal" href="#potcar-files" id="id104">POTCAR Files</a></p></li>
+<li><p><a class="reference internal" href="#kpoints-files" id="id105">KPOINTS Files</a></p></li>
+<li><p><a class="reference internal" href="#command-options" id="id106">Command Options</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prev-dir" id="id107">–prev_dir</a></p></li>
+<li><p><a class="reference internal" href="#options" id="id108">–options</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#see-also" id="id109">See Also</a></p></li>
+</ul>
+</nav>
+<section id="input-files-for-cell-relaxation">
+<h2><a class="toc-backref" href="#id101" role="doc-backlink">Input Files for Cell Relaxation</a><a class="headerlink" href="#input-files-for-cell-relaxation" title="Link to this heading">¶</a></h2>
+<p>Let’s assume we have a POSCAR file and are about to prepare INCAR, POTCAR, and KPOINTS files.
+The sub-command for this is <code class="docutils literal notranslate"><span class="pre">vasp_set</span></code> (alias: <code class="docutils literal notranslate"><span class="pre">vs</span></code>).</p>
+<p>Important options are <code class="docutils literal notranslate"><span class="pre">--task</span></code> (<code class="docutils literal notranslate"><span class="pre">-t</span></code>) and <code class="docutils literal notranslate"><span class="pre">--xc</span></code> (<code class="docutils literal notranslate"><span class="pre">-x</span></code>)
+that determine the target task and exchange-correlation functional.
+The defaults are structure optimization and PBE functional.</p>
+<p>Generate input files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vise<span class="w"> </span>vs
+</pre></div>
+</div>
+<p>Override POTCAR and INCAR settings:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vise<span class="w"> </span>vs<span class="w"> </span>--potcar<span class="w"> </span>Mg_pv<span class="w"> </span>-uis<span class="w"> </span>ALGO<span class="w"> </span>All
+</pre></div>
+</div>
+<p>You can also control settings via <code class="docutils literal notranslate"><span class="pre">vise.yaml</span></code> file, but command line arguments take priority.
+See <a class="reference internal" href="configuration.html"><span class="doc">Configuration</span></a> for details.</p>
+</section>
+<section id="tasks">
+<h2><a class="toc-backref" href="#id102" role="doc-backlink">Tasks</a><a class="headerlink" href="#tasks" title="Link to this heading">¶</a></h2>
+<p>List of INCAR settings for each task:</p>
+<table class="docutils align-default" id="id99">
+<caption><span class="caption-text">Tasks</span><a class="headerlink" href="#id99" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>vasp default</p></th>
+<th class="head"><p>structure_opt_rough</p></th>
+<th class="head"><p>structure_opt</p></th>
+<th class="head"><p>structure_opt_tight</p></th>
+<th class="head"><p>cluster_opt</p></th>
+<th class="head"><p>defect</p></th>
+<th class="head"><p>phonon disp</p></th>
+<th class="head"><p>band</p></th>
+<th class="head"><p>dos</p></th>
+<th class="head"><p>dielectric_dfpt</p></th>
+<th class="head"><p>dielectric_finite_field</p></th>
+<th class="head"><p>dielectric_function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PREC</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>A</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>A</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+</tr>
+<tr class="row-odd"><td><p>LREAL</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>A</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+<td><p>F</p></td>
+</tr>
+<tr class="row-even"><td><p>ENCUT</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX) * 1.3</p></td>
+<td><p>max(ENMAX) * 1.3</p></td>
+<td><p>max(ENMAX) * 1.3</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+<td><p>max(ENMAX)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ISPIN</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>ISIF</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADDGRID</p></td>
+<td><p>FALSE</p></td>
+<td><p><a href="#id1"><span class="problematic" id="id2">**</span></a></p></td>
+<td><p><a href="#id3"><span class="problematic" id="id4">**</span></a></p></td>
+<td><p>TRUE</p></td>
+<td><p><a href="#id5"><span class="problematic" id="id6">**</span></a></p></td>
+<td><p><a href="#id7"><span class="problematic" id="id8">**</span></a></p></td>
+<td><p>TRUE</p></td>
+<td><p><a href="#id9"><span class="problematic" id="id10">**</span></a></p></td>
+<td><p><a href="#id11"><span class="problematic" id="id12">**</span></a></p></td>
+<td><p><a href="#id13"><span class="problematic" id="id14">**</span></a></p></td>
+<td><p><a href="#id15"><span class="problematic" id="id16">**</span></a></p></td>
+<td><p><a href="#id17"><span class="problematic" id="id18">**</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>EDIFF</p></td>
+<td><p>1.00E-04</p></td>
+<td><p>1.00E-04</p></td>
+<td><p>1.00E-07</p></td>
+<td><p>1.00E-08</p></td>
+<td><p>1.00E-07</p></td>
+<td><p>1.00E-05</p></td>
+<td><p>1.00E-08</p></td>
+<td><p>1.00E-05</p></td>
+<td><p>1.00E-05</p></td>
+<td><p>1.00E-06</p></td>
+<td><p>1.00E-06</p></td>
+<td><p>1.00E-05</p></td>
+</tr>
+<tr class="row-odd"><td><p>EDIFFG</p></td>
+<td><p>EDIFF * 10</p></td>
+<td><p>-2.00E-01</p></td>
+<td><p>-5.00E-03</p></td>
+<td><p>-1.00E-03</p></td>
+<td><p>-5.00E-03</p></td>
+<td><p>-3.00E-02</p></td>
+<td><p><a href="#id19"><span class="problematic" id="id20">**</span></a></p></td>
+<td><p><a href="#id21"><span class="problematic" id="id22">**</span></a></p></td>
+<td><p><a href="#id23"><span class="problematic" id="id24">**</span></a></p></td>
+<td><p><a href="#id25"><span class="problematic" id="id26">**</span></a></p></td>
+<td><p><a href="#id27"><span class="problematic" id="id28">**</span></a></p></td>
+<td><p><a href="#id29"><span class="problematic" id="id30">**</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>IBRION</p></td>
+<td><p>-1</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>8</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>NBANDS</p></td>
+<td></td>
+<td><p><a href="#id31"><span class="problematic" id="id32">**</span></a></p></td>
+<td><p><a href="#id33"><span class="problematic" id="id34">**</span></a></p></td>
+<td><p><a href="#id35"><span class="problematic" id="id36">**</span></a></p></td>
+<td><p><a href="#id37"><span class="problematic" id="id38">**</span></a></p></td>
+<td><p><a href="#id39"><span class="problematic" id="id40">**</span></a></p></td>
+<td><p><a href="#id41"><span class="problematic" id="id42">**</span></a></p></td>
+<td><p><a href="#id43"><span class="problematic" id="id44">**</span></a>1</p></td>
+<td><p><a href="#id45"><span class="problematic" id="id46">**</span></a>1</p></td>
+<td><p><a href="#id47"><span class="problematic" id="id48">**</span></a></p></td>
+<td><p><a href="#id49"><span class="problematic" id="id50">**</span></a></p></td>
+<td><p><a href="#id51"><span class="problematic" id="id52">**</span></a>1</p></td>
+</tr>
+<tr class="row-even"><td><p>ISMEAR</p></td>
+<td><p>1</p></td>
+<td><p><a href="#id53"><span class="problematic" id="id54">**</span></a>2</p></td>
+<td><p><a href="#id55"><span class="problematic" id="id56">**</span></a>2</p></td>
+<td><p><a href="#id57"><span class="problematic" id="id58">**</span></a>2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p><a href="#id59"><span class="problematic" id="id60">**</span></a>2</p></td>
+<td><p>0</p></td>
+<td><p><a href="#id61"><span class="problematic" id="id62">**</span></a>2</p></td>
+<td><p><a href="#id63"><span class="problematic" id="id64">**</span></a>2</p></td>
+<td><p><a href="#id65"><span class="problematic" id="id66">**</span></a>2</p></td>
+<td><p><a href="#id67"><span class="problematic" id="id68">**</span></a>2</p></td>
+</tr>
+<tr class="row-odd"><td><p>NSW</p></td>
+<td><p>0</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
+<td><p>20</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>POTIM</p></td>
+<td><p>0.5</p></td>
+<td><p>0.1</p></td>
+<td><p><a href="#id69"><span class="problematic" id="id70">**</span></a></p></td>
+<td><p><a href="#id71"><span class="problematic" id="id72">**</span></a></p></td>
+<td><p><a href="#id73"><span class="problematic" id="id74">**</span></a></p></td>
+<td><p><a href="#id75"><span class="problematic" id="id76">**</span></a></p></td>
+<td><p><a href="#id77"><span class="problematic" id="id78">**</span></a></p></td>
+<td><p><a href="#id79"><span class="problematic" id="id80">**</span></a></p></td>
+<td><p><a href="#id81"><span class="problematic" id="id82">**</span></a></p></td>
+<td><p><a href="#id83"><span class="problematic" id="id84">**</span></a></p></td>
+<td><p><a href="#id85"><span class="problematic" id="id86">**</span></a></p></td>
+<td><p><a href="#id87"><span class="problematic" id="id88">**</span></a></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Is NPAR allowed?</p></td>
+<td><p>–</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No (<a href="#id89"><span class="problematic" id="id90">**</span></a>3)</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kpoint factor(<a href="#id91"><span class="problematic" id="id92">**</span></a>4)</p></td>
+<td><p>–</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>Is structure changed? (<a href="#id93"><span class="problematic" id="id94">**</span></a>5)</p></td>
+<td><p>–</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Kpoint mesh rule (<a href="#id95"><span class="problematic" id="id96">**</span></a>6)</p></td>
+<td></td>
+<td><p>primitive</p></td>
+<td><p>primitive</p></td>
+<td><p>primitive</p></td>
+<td><p>Γ-point only</p></td>
+<td><p>uniform</p></td>
+<td><p>uniform</p></td>
+<td><p>band</p></td>
+<td><p>Γ-centered uniform</p></td>
+<td><p>primitive</p></td>
+<td><p>primitive</p></td>
+<td><p>Γ-centered uniform</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes:</strong></p>
+<ul class="simple">
+<li><p>**: Not set, uses VASP default</p></li>
+<li><p>**1: Band count = valence electrons / 2 + unoccupied bands per element</p></li>
+<li><p>**2: ISMEAR=-4 or -5 for insulators with ≥4 k-points, else ISMEAR=0</p></li>
+<li><p>**3: IBRION=8 and NPAR≥2 combination is prohibited</p></li>
+<li><p>**4: K-point multiplication factor (e.g., DOS doubles k-points)</p></li>
+<li><p>**5: Band calculations require primitive cells from seekpath</p></li>
+<li><p>**6: See <a class="reference external" href="https://github.com/kumagai-group/vise/blob/master/vise/input_set/kpoints_mode.py">kpoints_mode.py</a></p></li>
+</ul>
+<p><strong>Common settings:</strong></p>
+<ul class="simple">
+<li><p>SIGMA=0.1, NELM=100, LASPH=True</p></li>
+<li><p>For DOS/dielectric: EMIN, EMAX, NEDOS are set based on band edges</p></li>
+<li><p>Gamma-centered mesh is forced when ISMEAR=-5</p></li>
+</ul>
+</section>
+<section id="xc-functionals">
+<h2><a class="toc-backref" href="#id103" role="doc-backlink">XC Functionals</a><a class="headerlink" href="#xc-functionals" title="Link to this heading">¶</a></h2>
+<p>INCAR settings for each XC functional:</p>
+<table class="docutils align-default" id="id100">
+<caption><span class="caption-text">XC functional</span><a class="headerlink" href="#id100" title="Link to this table">¶</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>vasp default</p></th>
+<th class="head"><p>pbe</p></th>
+<th class="head"><p>pbesol</p></th>
+<th class="head"><p>lda</p></th>
+<th class="head"><p>scan</p></th>
+<th class="head"><p>pbe0</p></th>
+<th class="head"><p>hse</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ALGO</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>N</p></td>
+<td><p>D</p></td>
+<td><p>D</p></td>
+</tr>
+<tr class="row-odd"><td><p>LREAL</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+</tr>
+<tr class="row-even"><td><p>LWAVE</p></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>TRUE</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Consider Hubbard U (<a href="#id97"><span class="problematic" id="id98">**</span></a>1)</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>TRUE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+</tr>
+<tr class="row-odd"><td><p>HF-related tags</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>FALSE</p></td>
+<td><p>○</p></td>
+<td><p>○</p></td>
+</tr>
+<tr class="row-even"><td><p>HFSCREEN</p></td>
+<td><p>none</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>0.208</p></td>
+</tr>
+<tr class="row-odd"><td><p>NKRED</p></td>
+<td><p>1</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>=Kpoint factor</p></td>
+<td><p>=Kpoint factor</p></td>
+</tr>
+<tr class="row-even"><td><p>TIME</p></td>
+<td><p>0.4</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>–</p></td>
+<td><p>0.4</p></td>
+<td><p>0.4</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> LDAUU and LDAUL parameters are in <a class="reference external" href="https://github.com/kumagai-group/vise/blob/master/vise/input_set/datasets/u_parameter_set.yaml">u_parameter_set.yaml</a></p>
+</section>
+<section id="potcar-files">
+<h2><a class="toc-backref" href="#id104" role="doc-backlink">POTCAR Files</a><a class="headerlink" href="#potcar-files" title="Link to this heading">¶</a></h2>
+<p>Default POTCAR selection is in <a class="reference external" href="https://github.com/kumagai-group/vise/blob/master/vise/input_set/datasets/potcar_set.yaml">potcar_set.yaml</a>.</p>
+</section>
+<section id="kpoints-files">
+<h2><a class="toc-backref" href="#id105" role="doc-backlink">KPOINTS Files</a><a class="headerlink" href="#kpoints-files" title="Link to this heading">¶</a></h2>
+<p>K-point mesh is proportional to reciprocal lattice constants.</p>
+<p>For a cubic lattice with a=10Å:</p>
+<ul class="simple">
+<li><p>Reciprocal length: 2π/10</p></li>
+<li><p>With density 2.5Å: k-points = ceil(2π/10 × 2.5) = ceil(π/2) = 2</p></li>
+</ul>
+<p>For body-centered orthorhombic/tetragonal systems, k-point counts are equalized
+using the geometric mean of reciprocal lattice constants.</p>
+</section>
+<section id="command-options">
+<h2><a class="toc-backref" href="#id106" role="doc-backlink">Command Options</a><a class="headerlink" href="#command-options" title="Link to this heading">¶</a></h2>
+<section id="prev-dir">
+<h3><a class="toc-backref" href="#id107" role="doc-backlink">–prev_dir</a><a class="headerlink" href="#prev-dir" title="Link to this heading">¶</a></h3>
+<p>Parse previous VASP calculations:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vise<span class="w"> </span>vs<span class="w"> </span>--prev_dir<span class="w"> </span>../relax
+</pre></div>
+</div>
+<p>Extracts structure, charge, band edges, and magnetization.
+Use with <code class="docutils literal notranslate"><span class="pre">--file_transfer</span></code> to copy/move/link files.</p>
+</section>
+<section id="options">
+<h3><a class="toc-backref" href="#id108" role="doc-backlink">–options</a><a class="headerlink" href="#options" title="Link to this heading">¶</a></h3>
+<p>Set generator options:</p>
+<p><strong>IncarSettingsGenerator options:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">charge</span></code>: System charge (default: 0.0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">band_gap</span></code>: Band gap value</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vbm_cbm</span></code>: Band edge positions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchange_ratio</span></code>: Hybrid functional mixing (default: 0.25)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set_hubbard_u</span></code>: Enable DFT+U</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auto_npar_kpar</span></code>: Auto-set parallelization (default: True)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cutoff_energy</span></code>: Custom ENCUT</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_magnetization</span></code>: Spin-polarized calculation</p></li>
+</ul>
+<p><strong>StructureKpointsGenerator options:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kpt_density</span></code>: K-point density in Å</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gamma_centered</span></code>: Force Gamma centering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">only_even_num_kpts</span></code>: Use even k-point counts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_kpt_factor</span></code>: K-point multiplication factor</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vise<span class="w"> </span>vs<span class="w"> </span>--options<span class="w"> </span>cutoff_energy<span class="w"> </span><span class="m">1000</span><span class="w"> </span>only_even_num_kpts<span class="w"> </span>True
+</pre></div>
+</div>
+</section>
+</section>
+<section id="see-also">
+<h2><a class="toc-backref" href="#id109" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="band_dos.html"><span class="doc">Band Structure &amp; DOS</span></a> - Analyze calculation results</p></li>
+<li><p><a class="reference internal" href="cli_commands.html"><span class="doc">CLI Commands</span></a> - Full CLI reference</p></li>
+<li><p><a class="reference internal" href="workflows.html"><span class="doc">Workflow Examples</span></a> - Complete workflow examples</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="preparing_structures.html" class="btn btn-neutral float-left" title="Preparing Structures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, Yu Kumagai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

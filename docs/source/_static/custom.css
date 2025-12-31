@@ -1,310 +1,231 @@
-/* Deep Sea Theme - Custom styles for vise documentation */
+/* vise Documentation - Clean & Simple Theme */
 
 /* ======================================
-   Color Palette - Deep Sea Inspired
+   Simple Color Palette - High Readability
    ====================================== */
 :root {
-    --deep-sea-darkest: #0a1628;
-    --deep-sea-dark: #0f2744;
-    --deep-sea-medium: #1a3a5c;
-    --deep-sea-light: #2a5082;
-    --deep-sea-glow: #3d7ab3;
-    --deep-sea-accent: #5fa8d3;
-    --deep-sea-highlight: #7ec8e3;
-    --text-primary: #e8f4f8;
-    --text-secondary: #b8d4e3;
-    --text-muted: #8ab4cc;
-    --code-bg: #0d1f35;
-    --border-color: #1e4a6c;
+    --primary: #2980b9;
+    --primary-dark: #1a5276;
+    --primary-light: #3498db;
+    --bg-sidebar: #343a40;
+    --bg-main: #ffffff;
+    --bg-code: #f8f9fa;
+    --text-main: #212529;
+    --text-light: #6c757d;
+    --text-white: #ffffff;
+    --border: #dee2e6;
+    --link: #2980b9;
+    --link-hover: #1a5276;
 }
 
 /* ======================================
-   Sidebar - Fixed Navigation
+   Sidebar - Clean Dark Style
    ====================================== */
 .wy-nav-side {
-    background: linear-gradient(180deg, var(--deep-sea-darkest) 0%, var(--deep-sea-dark) 100%);
+    background: var(--bg-sidebar);
 }
 
 .wy-side-nav-search {
-    background: var(--deep-sea-darkest);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--primary-dark);
 }
 
 .wy-side-nav-search input[type="text"] {
-    background: var(--deep-sea-medium);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
     border-radius: 4px;
 }
 
-.wy-side-nav-search input[type="text"]::placeholder {
-    color: var(--text-muted);
-}
-
-.wy-menu-vertical {
-    background: transparent;
-}
-
 .wy-menu-vertical a {
-    color: var(--text-secondary);
-    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .wy-menu-vertical a:hover {
-    background: var(--deep-sea-medium);
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
 }
 
 .wy-menu-vertical li.current > a {
-    background: var(--deep-sea-light);
-    color: var(--text-primary);
-    border-left: 3px solid var(--deep-sea-accent);
-}
-
-.wy-menu-vertical li.current a:hover {
-    background: var(--deep-sea-light);
+    background: var(--primary);
+    color: var(--text-white);
 }
 
 .wy-menu-vertical li.toctree-l1.current > a {
-    background: var(--deep-sea-medium);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: none;
 }
 
-/* Caption styling (section headers) */
+.wy-menu-vertical li.toctree-l2.current > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
+    background: transparent;
+}
+
+.wy-menu-vertical li.current a:hover {
+    background: var(--primary-light);
+}
+
+/* Caption (section headers in sidebar) */
 .wy-menu-vertical p.caption {
-    color: var(--deep-sea-accent);
+    color: rgba(255, 255, 255, 0.6);
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.75em;
-    letter-spacing: 0.1em;
-    margin-top: 1.5em;
+    letter-spacing: 0.05em;
+    margin-top: 1em;
     padding: 0.5em 1.25em;
-    border-top: 1px solid var(--border-color);
-}
-
-.wy-menu-vertical p.caption:first-child {
-    border-top: none;
-    margin-top: 0;
 }
 
 /* ======================================
-   Main Content Area
+   Main Content - Light & Readable
    ====================================== */
 .wy-nav-content-wrap {
-    background: var(--deep-sea-darkest);
+    background: #f5f5f5;
 }
 
 .wy-nav-content {
-    background: var(--deep-sea-dark);
+    background: var(--bg-main);
     max-width: 900px;
+    padding: 2em 3em;
 }
 
 .rst-content {
-    color: var(--text-secondary);
+    color: var(--text-main);
+    font-size: 16px;
+    line-height: 1.7;
 }
 
 /* ======================================
-   Typography
+   Typography - Clear & Readable
    ====================================== */
 h1, h2, h3, h4, h5, h6,
 .rst-content h1, .rst-content h2, .rst-content h3,
 .rst-content h4, .rst-content h5, .rst-content h6 {
-    color: var(--text-primary);
-    font-weight: 500;
+    color: var(--text-main);
+    font-weight: 600;
 }
 
 .rst-content h1 {
-    border-bottom: 2px solid var(--deep-sea-glow);
-    padding-bottom: 0.5em;
+    font-size: 2em;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.8em;
 }
 
 .rst-content h2 {
-    border-bottom: 1px solid var(--border-color);
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--border);
     padding-bottom: 0.3em;
+    margin-top: 1.5em;
+}
+
+.rst-content h3 {
+    font-size: 1.25em;
+    margin-top: 1.3em;
 }
 
 a {
-    color: var(--deep-sea-accent);
+    color: var(--link);
 }
 
 a:hover {
-    color: var(--deep-sea-highlight);
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+p {
+    margin-bottom: 1em;
 }
 
 /* ======================================
-   Code Blocks
+   Code Blocks - Clean Style
    ====================================== */
 .rst-content code,
 .rst-content tt,
 code {
-    background: var(--code-bg);
-    color: var(--deep-sea-highlight);
-    border: 1px solid var(--border-color);
+    background: var(--bg-code);
+    color: #c7254e;
+    border: 1px solid var(--border);
     border-radius: 3px;
     padding: 2px 6px;
+    font-size: 0.9em;
 }
 
 .rst-content pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1em;
+    overflow-x: auto;
 }
 
 .rst-content pre code {
     background: transparent;
     border: none;
     padding: 0;
+    color: var(--text-main);
 }
 
 .highlight {
-    background: var(--code-bg);
+    background: var(--bg-code);
 }
 
-/* Syntax highlighting adjustments */
-.highlight .k, .highlight .kn, .highlight .kd { color: #7ec8e3; }  /* keywords */
-.highlight .s, .highlight .s1, .highlight .s2 { color: #a8d8a8; }  /* strings */
-.highlight .n { color: #e8f4f8; }  /* names */
-.highlight .c, .highlight .c1 { color: #6a8fa3; }  /* comments */
-.highlight .o { color: #b8d4e3; }  /* operators */
-.highlight .m, .highlight .mi, .highlight .mf { color: #ffb86c; }  /* numbers */
-.highlight .nb { color: #8be9fd; }  /* builtins */
-.highlight .nf { color: #5fa8d3; }  /* functions */
-
 /* ======================================
-   Tables
+   Tables - Simple & Clean
    ====================================== */
 .rst-content table.docutils {
     border-collapse: collapse;
-    border: 1px solid var(--border-color);
+    width: 100%;
+    margin: 1em 0;
 }
 
 .rst-content table.docutils th {
-    background: var(--deep-sea-medium);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
+    background: var(--bg-code);
+    color: var(--text-main);
+    font-weight: 600;
+    border: 1px solid var(--border);
     padding: 10px 15px;
+    text-align: left;
 }
 
 .rst-content table.docutils td {
-    background: var(--deep-sea-dark);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border);
     padding: 8px 15px;
 }
 
-.rst-content table.docutils tr:hover td {
-    background: var(--deep-sea-medium);
+.rst-content table.docutils tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+/* ======================================
+   Lists
+   ====================================== */
+.rst-content ul, .rst-content ol {
+    margin-bottom: 1em;
+    padding-left: 2em;
+}
+
+.rst-content li {
+    margin-bottom: 0.5em;
 }
 
 /* ======================================
    Admonitions (Note, Warning, etc.)
    ====================================== */
 .rst-content .admonition {
-    background: var(--deep-sea-medium);
-    border-left: 4px solid var(--deep-sea-accent);
+    padding: 1em;
+    margin: 1em 0;
     border-radius: 4px;
-}
-
-.rst-content .admonition-title {
-    background: var(--deep-sea-light);
-    color: var(--text-primary);
 }
 
 .rst-content .note {
-    border-left-color: var(--deep-sea-accent);
+    background: #e7f3fe;
+    border-left: 4px solid var(--primary);
 }
 
 .rst-content .warning {
-    border-left-color: #f0ad4e;
+    background: #fff3cd;
+    border-left: 4px solid #ffc107;
 }
 
-.rst-content .warning .admonition-title {
-    background: #5a4020;
-}
-
-/* ======================================
-   Breadcrumbs
-   ====================================== */
-.wy-breadcrumbs {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5em;
-}
-
-.wy-breadcrumbs a {
-    color: var(--deep-sea-accent);
-}
-
-.wy-breadcrumbs li {
-    color: var(--text-muted);
-}
-
-/* ======================================
-   Footer
-   ====================================== */
-footer {
-    color: var(--text-muted);
-}
-
-footer a {
-    color: var(--deep-sea-accent);
-}
-
-/* ======================================
-   Scrollbar
-   ====================================== */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--deep-sea-darkest);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--deep-sea-medium);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--deep-sea-light);
-}
-
-/* ======================================
-   Logo and Branding
-   ====================================== */
-.wy-side-nav-search > a {
-    color: var(--deep-sea-highlight);
-    font-size: 1.3em;
+.rst-content .admonition-title {
     font-weight: 600;
-}
-
-.wy-side-nav-search > a:hover {
-    color: var(--text-primary);
-}
-
-/* ======================================
-   Mobile Responsiveness
-   ====================================== */
-@media screen and (max-width: 768px) {
-    .wy-nav-top {
-        background: var(--deep-sea-darkest);
-    }
-    
-    .wy-nav-top a {
-        color: var(--text-primary);
-    }
-}
-
-/* ======================================
-   List Styling
-   ====================================== */
-.rst-content ul, .rst-content ol {
-    color: var(--text-secondary);
-}
-
-.rst-content .section ul li,
-.rst-content .section ol li {
     margin-bottom: 0.5em;
 }
 
@@ -312,17 +233,46 @@ footer a {
    Table of Contents (local)
    ====================================== */
 .rst-content .contents.local {
-    background: var(--deep-sea-medium);
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    padding: 1em;
-}
-
-.rst-content .contents.local a {
-    color: var(--deep-sea-accent);
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1em 1.5em;
+    margin-bottom: 1.5em;
 }
 
 .rst-content .contents.local p.topic-title {
-    color: var(--text-primary);
     font-weight: 600;
+    margin-bottom: 0.5em;
+}
+
+/* ======================================
+   Breadcrumbs
+   ====================================== */
+.wy-breadcrumbs {
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ======================================
+   Footer
+   ====================================== */
+footer {
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+}
+
+/* ======================================
+   Mobile
+   ====================================== */
+@media screen and (max-width: 768px) {
+    .wy-nav-content {
+        padding: 1em;
+    }
+    
+    .rst-content {
+        font-size: 15px;
+    }
 }

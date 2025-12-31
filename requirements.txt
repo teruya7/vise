@@ -1,6 +1,0 @@
-pymatgen
-seekpath
-num2words
-more_itertools
-phonopy
-mp-api

@@ -1,0 +1,93 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vise"
+version = "0.9.5"
+description = "VASP Integrated Supporting Environment - Package for handling VASP input/output"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Yu Kumagai", email = "yukumagai@tohoku.ac.jp"}
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+keywords = ["VASP", "DFT", "materials science", "first-principles"]
+dependencies = [
+    "pymatgen>=2024.1.0",
+    "seekpath",
+    "num2words",
+    "more_itertools",
+    "phonopy",
+    "mp-api",
+    "typer>=0.9.0",
+    "rich",
+    "tabulate",
+    "monty",
+    "spglib",
+    "matplotlib",
+    "seaborn",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+]
+bolztrap = [
+    "BoltzTrap2",
+]
+
+
+
+[project.urls]
+Homepage = "https://github.com/kumagai-group/vise"
+Documentation = "https://kumagai-group.github.io/vise/"
+Repository = "https://github.com/kumagai-group/vise"
+Issues = "https://github.com/kumagai-group/vise/issues"
+
+[project.scripts]
+vise = "vise.cli.typer_main:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["vise*"]
+exclude = ["tests*", "docs*"]
+
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]  # line too long
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true

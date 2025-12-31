@@ -1,25 +1,38 @@
 # -*- coding: utf-8 -*-
 #  Copyright (c) 2022. Distributed under the terms of the MIT License.
+"""Irreducible representation extraction from VASP.
+
+This module provides utilities for extracting irreducible representations
+(irreps) from VASP band structure calculations using the irrep package.
+"""
+
 from typing import List, Tuple
 
-import numpy as np
-from pymatgen.core import Structure
 from pymatgen.io.vasp import Kpoints
 
 from vise.analyzer.plot_band import Irrep, Irreps
 from vise.analyzer.vasp.plot_band import greek_to_unicode
 from vise.error import ViseError
 from vise.util.logger import get_logger
-from vise.util.structure_symmetrizer import StructureSymmetrizer
 
 logger = get_logger(__name__)
 
 
-def special_points_from_kpoints(kpoints_filename: str) \
-        -> Tuple[List[str], List[int]]:
+def special_points_from_kpoints(
+    kpoints_filename: str,
+) -> Tuple[List[str], List[int]]:
+    """Extract special point labels and indices from KPOINTS file.
 
+    Args:
+        kpoints_filename: Path to VASP KPOINTS file.
+
+    Returns:
+        Tuple of (special_point_labels, k-point_indices).
+        Labels are converted from VASP convention (e.g., "GAMMA" -> "GM").
+    """
     kpoints = Kpoints.from_file(kpoints_filename)
-    special_points, kpt_indices = [], []
+    special_points: List[str] = []
+    kpt_indices: List[int] = []
 
     for idx, label in enumerate(kpoints.labels, 1):
         if label in [None, "None"] or label in special_points:
@@ -27,82 +40,42 @@ def special_points_from_kpoints(kpoints_filename: str) \
         special_points.append(label)
         kpt_indices.append(idx)
 
+    # Convert GAMMA to GM for irrep package compatibility
     special_points = [x.replace("GAMMA", "GM") for x in special_points]
 
     return special_points, kpt_indices
 
 
-# def make_irreps_from_wavecar(special_point_symbols: List[str],
-#                              kpt_indices: List[int],
-#                              sg_num: int = None,
-#                              wavecar_filename: str = "WAVECAR",
-#                              poscar_filename: str = "POSCAR",
-#                              plane_wave_cutoff: float = 50.0,
-#                              degeneracy_threshold: float = 0.01,
-#                              **bs_kwargs) -> Irreps:
-#
-#     if sg_num is None:
-#         structure = Structure.from_file(poscar_filename)
-#         sg_analyzer = StructureSymmetrizer(structure=structure)
-#         sg_num = sg_analyzer.sg_number
-#
-#     try:
-#         from irreptables import IrrepTable
-#         from irrep.bandstructure import BandStructure
-#     except ImportError:
-#         logger.warning(f"To find irreps, install the irrep package.")
-#         raise
-#     logger.info("We set spinor is False.")
-#     irrep_table = IrrepTable(sg_num, spinor=False)
-#     symbols = {i.kpname for i in irrep_table.irreps}
-#
-#     listed_k_indices, listed_symbols = [], []
-#     for s, k_index in zip(special_point_symbols, kpt_indices):
-#         if s in symbols:
-#             listed_symbols.append(s)
-#             listed_k_indices.append(k_index)
-#         else:
-#             logger.info(f"{s} is not listed in the IrrepTable.")
-#
-#     bs = BandStructure(fWAV=wavecar_filename,
-#                        fPOS=poscar_filename,
-#                        Ecut=plane_wave_cutoff,
-#                        kplist=np.array(listed_k_indices),
-#                        spinor=False,
-#                        **bs_kwargs)
-#
-#     characters = bs.write_characters(degen_thresh=degeneracy_threshold,
-#                                      kpnames=listed_symbols)
-#
-#     irrep_dict = {}
-#     for symbol, c_kpt, kpt in \
-#             zip(listed_symbols, characters["k-points"], bs.kpoints):
-#         symbols = []
-#         for irrep in c_kpt["irreps"]:
-#             try:
-#                 irrep_str = find_irrep(irrep)
-#             except ViseNoIrrepError:
-#                 irrep_str = "Unknown"
-#             symbols.append(greek_to_unicode(irrep_str))
-#
-#         irrep_dict[greek_to_unicode(symbol)] = \
-#             Irrep(kpt.K.tolist(),
-#                   symbols,
-#                   c_kpt["energies"].tolist(),
-#                   c_kpt["dimensions"].tolist())
-#
-#     return Irreps(bs.spacegroup.number, irrep_dict)
+# NOTE: make_irreps_from_wavecar is commented out as it requires
+# the external 'irrep' package which may not be installed.
+# See original commented code for the full implementation.
 
 
 class ViseNoIrrepError(ViseError):
+    """Error raised when irrep cannot be determined."""
     pass
 
 
-def find_irrep(d: dict, threshold: float = 0.99):
-    for k, v in d.items():
-        if v[0] > threshold:
-            return k
-    logger.warning(f"""Any irrep could not be found. 
-Threshold: {threshold}
-Characters: {d}""")
+def find_irrep(d: dict, threshold: float = 0.99) -> str:
+    """Find the dominant irreducible representation.
+
+    Args:
+        d: Dictionary mapping irrep symbols to (weight, ...) tuples.
+        threshold: Minimum weight to accept an irrep.
+
+    Returns:
+        Symbol of the dominant irrep.
+
+    Raises:
+        ViseNoIrrepError: If no irrep exceeds the threshold.
+    """
+    for symbol, values in d.items():
+        if values[0] > threshold:
+            return symbol
+
+    logger.warning(
+        f"No irrep found above threshold.\n"
+        f"Threshold: {threshold}\n"
+        f"Characters: {d}"
+    )
     raise ViseNoIrrepError

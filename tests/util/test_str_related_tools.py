@@ -46,10 +46,11 @@ class TestStr2Bool:
         with pytest.raises(ValueError, match="invalid truth value"):
             str2bool("yes")
 
-    def test_empty_string_returns_false(self):
-        """Test empty string returns False (implementation quirk: '' in 'false')."""
-        # Empty string is contained in 'false', so it returns False
-        assert str2bool("") is False
+    def test_empty_string_raises_error(self):
+        """Test empty string raises ValueError."""
+        with pytest.raises(ValueError, match="invalid truth value"):
+            str2bool("")
+
 
     def test_number_string_raises_error(self):
         """Test number string raises ValueError."""

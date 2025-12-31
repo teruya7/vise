@@ -45,7 +45,9 @@ dependencies = [
 dev = [
     "pytest>=7.0",
     "pytest-cov",
+    "pytest-mock",
 ]
+
 bolztrap = [
     "BoltzTrap2",
 ]

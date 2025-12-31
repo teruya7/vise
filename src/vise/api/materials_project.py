@@ -15,7 +15,7 @@ Example:
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
 from pymatgen.core import Structure
 
@@ -56,15 +56,15 @@ def search_materials(formula: str) -> List[MaterialEntry]:
         ...     print(f"{entry.material_id}: {entry.space_group}")
     """
     from mp_api.client import MPRester
-    
+
     with MPRester() as m:
         candidates = m.summary.search(
             formula=formula,
             fields=["material_id", "energy_above_hull", "symmetry", "band_gap"]
         )
-    
+
     sorted_candidates = sorted(candidates, key=lambda x: x.energy_above_hull)
-    
+
     entries = []
     for c in sorted_candidates:
         entries.append(MaterialEntry(
@@ -73,7 +73,7 @@ def search_materials(formula: str) -> List[MaterialEntry]:
             space_group=c.symmetry.symbol,
             band_gap=c.band_gap
         ))
-    
+
     return entries
 
 
@@ -104,12 +104,12 @@ def get_structure_by_id(
         >>> structure = get_structure_by_id("mp-149", save_poscar=True)
     """
     from mp_api.client import MPRester
-    
+
     structure = MPRester().get_structure_by_material_id(material_id)
-    
+
     if save_poscar:
         structure.to(fmt="poscar", filename=str(poscar_filename))
-    
+
     return structure
 
 
@@ -147,15 +147,15 @@ def get_material_info(material_id: str) -> MaterialInfo:
         >>> print(f"Magnetization: {info.total_magnetization}")
     """
     from mp_api.client import MPRester
-    
+
     structure = MPRester().get_structure_by_material_id(material_id)
-    
+
     query = MPRester().summary.search(
         material_ids=[material_id],
         fields=["total_magnetization", "band_gap"]
     )
     data = query[0]
-    
+
     return MaterialInfo(
         structure=structure,
         material_id=material_id,
@@ -188,13 +188,13 @@ def get_most_stable_structure(
         ...     print(f"Got {structure.composition.reduced_formula}")
     """
     entries = search_materials(formula)
-    
+
     if not entries:
         return None
-    
+
     most_stable_id = entries[0].material_id
     return get_structure_by_id(
-        most_stable_id, 
+        most_stable_id,
         save_poscar=save_poscar,
         poscar_filename=poscar_filename
     )

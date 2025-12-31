@@ -15,7 +15,7 @@ Example:
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 from vise.analyzer.vasp.band_edge_properties import VaspBandEdgeProperties
 from vise.analyzer.vasp.make_effective_mass import make_effective_mass
@@ -53,11 +53,11 @@ class BandEdgeResult:
     is_direct: bool
     is_metal: bool
     efermi: float
-    
+
     def __str__(self) -> str:
         if self.is_metal:
             return f"Metallic (Fermi energy: {self.efermi:.4f} eV)"
-        
+
         lines = [
             f"Band gap: {self.band_gap:.4f} eV ({'direct' if self.is_direct else 'indirect'})",
             f"VBM: {self.vbm_info.energy:.4f} eV at k-point {self.vbm_info.kpoint_coords}",
@@ -78,11 +78,11 @@ class EffectiveMassResult:
     effective_mass: any
     temperature: float
     concentrations: List[float]
-    
+
     def save_json(self, filename: Union[str, Path] = "effective_mass.json") -> None:
         """Save effective mass data as JSON file."""
         self.effective_mass.to_json_file(str(filename))
-    
+
     def __str__(self) -> str:
         return str(self.effective_mass)
 
@@ -111,16 +111,16 @@ def get_band_edge_properties(
         ...     print(f"Band gap: {result.band_gap:.2f} eV")
         ...     print(f"VBM at: {result.vbm_info.kpoint_coords}")
     """
-    from pymatgen.io.vasp import Vasprun, Outcar
-    
+    from pymatgen.io.vasp import Outcar, Vasprun
+
     vasprun_obj = Vasprun(str(vasprun))
     outcar_obj = Outcar(str(outcar))
-    
+
     band_edge = VaspBandEdgeProperties(
-        vasprun_obj, outcar_obj, 
+        vasprun_obj, outcar_obj,
         integer_criterion=integer_criterion
     )
-    
+
     if band_edge.band_gap is None:
         return BandEdgeResult(
             band_gap=None,
@@ -130,24 +130,24 @@ def get_band_edge_properties(
             is_metal=True,
             efermi=vasprun_obj.efermi
         )
-    
+
     vbm = band_edge.vbm_info
     cbm = band_edge.cbm_info
-    
+
     vbm_info = KpointInfo(
         kpoint_index=vbm.kpoint_index,
         kpoint_coords=tuple(vbm.kpoint_coords),
         energy=vbm.energy
     )
-    
+
     cbm_info = KpointInfo(
         kpoint_index=cbm.kpoint_index,
         kpoint_coords=tuple(cbm.kpoint_coords),
         energy=cbm.energy
     )
-    
+
     is_direct = vbm.kpoint_index == cbm.kpoint_index
-    
+
     return BandEdgeResult(
         band_gap=band_edge.band_gap,
         vbm_info=vbm_info,
@@ -193,16 +193,16 @@ def calculate_effective_mass(
         ImportError: If BoltzTrap2 is not installed
         ValueError: If material is metallic
     """
-    from pymatgen.io.vasp import Vasprun, Outcar
-    
+    from pymatgen.io.vasp import Outcar, Vasprun
+
     if concentrations is None:
         concentrations = [1e18, 1e19, 1e20]
-    
+
     vasprun_obj = Vasprun(str(vasprun))
     outcar_obj = Outcar(str(outcar))
-    
+
     band_edge_prop = VaspBandEdgeProperties(vasprun_obj, outcar_obj)
-    
+
     try:
         vbm, cbm = band_edge_prop.vbm_cbm
     except TypeError:
@@ -210,14 +210,14 @@ def calculate_effective_mass(
             "Band gap does not exist, so not suited for effective "
             "mass calculation."
         )
-    
+
     effective_mass = make_effective_mass(
         vasprun_obj,
         temperature,
         concentrations,
         vbm, cbm
     )
-    
+
     return EffectiveMassResult(
         effective_mass=effective_mass,
         temperature=temperature,

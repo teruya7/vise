@@ -7,7 +7,7 @@ from VASP calculation outputs.
 """
 
 from collections import defaultdict
-from typing import Any, Dict, Tuple
+from typing import Dict, Tuple
 
 import numpy as np
 from pymatgen.core import Structure

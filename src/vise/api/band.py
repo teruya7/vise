@@ -16,9 +16,9 @@ Example:
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, List, Tuple, Union
+from typing import Optional, Tuple, Union
 
-from vise.analyzer.plot_band import BandPlotInfo, BandMplPlotter
+from vise.analyzer.plot_band import BandMplPlotter, BandPlotInfo
 from vise.analyzer.vasp.plot_band import BandPlotInfoFromVasp
 
 
@@ -38,9 +38,9 @@ class BandAnalysisResult:
     vbm: Optional[float]
     cbm: Optional[float]
     is_metal: bool
-    
+
     def save_plot(
-        self, 
+        self,
         filename: Union[str, Path] = "band.pdf",
         energy_range: Tuple[float, float] = (-10.0, 10.0),
         format: str = "pdf"
@@ -57,7 +57,7 @@ class BandAnalysisResult:
         plotter.construct_plot()
         plotter.plt.savefig(str(filename), format=format)
         plotter.plt.close()
-    
+
     def save_json(self, filename: Union[str, Path] = "band_plot_info.json") -> None:
         """
         Save plot info as JSON file.
@@ -93,17 +93,17 @@ def analyze_band(
         >>> result.save_plot("my_band.pdf", energy_range=(-5, 5))
     """
     from pymatgen.io.vasp import Vasprun
-    
+
     vasprun_obj = Vasprun(str(vasprun))
-    
+
     band_plot_info_from_vasp = BandPlotInfoFromVasp(
         vasprun=vasprun_obj,
         kpoints_filename=str(kpoints_filename)
     )
     plot_info = band_plot_info_from_vasp.make_band_plot_info()
-    
+
     band_edge = plot_info.band_edge
-    
+
     if band_edge is None:
         return BandAnalysisResult(
             plot_info=plot_info,
@@ -112,7 +112,7 @@ def analyze_band(
             cbm=None,
             is_metal=True
         )
-    
+
     return BandAnalysisResult(
         plot_info=plot_info,
         band_gap=band_edge.band_gap if hasattr(band_edge, 'band_gap') else None,

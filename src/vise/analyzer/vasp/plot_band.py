@@ -15,7 +15,12 @@ from pymatgen.electronic_structure.bandstructure import BandStructure
 from pymatgen.electronic_structure.plotter import BSPlotter
 from pymatgen.io.vasp import Vasprun
 
-from vise.analyzer.plot_band import BandEdgeForPlot, BandEnergyInfo, BandPlotInfo, XTicks
+from vise.analyzer.plot_band import (
+    BandEdgeForPlot,
+    BandEnergyInfo,
+    BandPlotInfo,
+    XTicks,
+)
 from vise.analyzer.plot_brillouin_zone import BZPlotInfo
 from vise.util.string import latexify
 

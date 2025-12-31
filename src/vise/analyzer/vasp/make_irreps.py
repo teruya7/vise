@@ -10,8 +10,6 @@ from typing import List, Tuple
 
 from pymatgen.io.vasp import Kpoints
 
-from vise.analyzer.plot_band import Irrep, Irreps
-from vise.analyzer.vasp.plot_band import greek_to_unicode
 from vise.error import ViseError
 from vise.util.logger import get_logger
 

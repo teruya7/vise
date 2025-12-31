@@ -16,7 +16,7 @@ from __future__ import annotations
 from math import ceil
 from typing import Dict, List, Optional, Union
 
-from pymatgen.core import Composition, Element, Structure
+from pymatgen.core import Composition, Structure
 from pymatgen.io.vasp.sets import Potcar
 
 from vise.analyzer.band_edge_properties import is_band_gap

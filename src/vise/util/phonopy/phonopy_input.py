@@ -1,29 +1,35 @@
 # -*- coding: utf-8 -*-
 #  Copyright (c) 2021. Distributed under the terms of the MIT License.
 from dataclasses import dataclass
-from typing import List, Optional, Dict, Any
+from typing import Any, Dict, List, Optional
 
 import numpy as np
 from monty.json import MSONable
 
 try:
     from phonopy import Phonopy
-    from phonopy.interface.vasp import read_vasp_from_strings, \
-        parse_force_constants, get_born_vasprunxml
+    from phonopy.interface.vasp import (
+        get_born_vasprunxml,
+        parse_force_constants,
+        read_vasp_from_strings,
+    )
     from phonopy.structure.atoms import PhonopyAtoms
-    from pymatgen.electronic_structure.boltztrap2 import VasprunBSLoader, \
-        BztInterpolator, BztTransportProperties
+    from pymatgen.electronic_structure.boltztrap2 import (
+        BztInterpolator,
+        BztTransportProperties,
+        VasprunBSLoader,
+    )
 except ImportError:
     raise ImportError('Calculating effective mass requires BoltzTrap2')
 
 from pymatgen.core import IStructure, Structure
 from pymatgen.io.vasp import Vasprun
+
 from vise.util.bravais_lattice import BravaisLattice
 from vise.util.centering import Centering
 from vise.util.logger import get_logger
 from vise.util.mix_in import ToJsonFileMixIn
 from vise.util.structure_symmetrizer import StructureSymmetrizer
-
 
 logger = get_logger(__name__)
 

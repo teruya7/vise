@@ -6,7 +6,6 @@ This module provides utilities for creating DieleFuncData from VASP
 optical calculations (LOPTICS = .TRUE.).
 """
 
-from typing import Optional
 
 import numpy as np
 from pymatgen.io.vasp import Outcar, Vasprun

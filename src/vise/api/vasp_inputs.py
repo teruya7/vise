@@ -17,7 +17,7 @@ Example:
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Dict, Any, Union
+from typing import Any, Dict, Optional, Union
 
 from pymatgen.core import Structure
 from pymatgen.io.vasp import Kpoints, Poscar, Potcar
@@ -26,8 +26,8 @@ from vise.input_set.incar import ViseIncar
 from vise.input_set.input_options import CategorizedInputOptions
 from vise.input_set.kpoints import ViseKpoints
 from vise.input_set.task import Task
-from vise.input_set.xc import Xc
 from vise.input_set.vasp_input_files import VaspInputFiles
+from vise.input_set.xc import Xc
 
 
 @dataclass
@@ -48,9 +48,9 @@ class VaspInputSet:
     potcar: Potcar
     structure: Structure
     initial_structure: Structure
-    
+
     def write(
-        self, 
+        self,
         directory: Union[str, Path],
         poscar_significant_figures: int = 10
     ) -> None:
@@ -69,18 +69,18 @@ class VaspInputSet:
         """
         directory = Path(directory)
         directory.mkdir(exist_ok=True, parents=True)
-        
+
         self.incar.write_file(directory / "INCAR")
-        
+
         kpoints = ViseKpoints.from_dict(self.kpoints.as_dict())
         kpoints.write_file(directory / "KPOINTS")
-        
+
         self.poscar.write_file(
-            directory / "POSCAR", 
+            directory / "POSCAR",
             significant_figures=poscar_significant_figures
         )
         self.potcar.write_file(directory / "POTCAR")
-    
+
     def as_dict(self) -> Dict[str, Any]:
         """
         Get input files as dictionary for inspection.
@@ -172,11 +172,11 @@ def create_vasp_set(
         task = Task(task)
     if isinstance(xc, str):
         xc = Xc(xc)
-    
+
     # Set k-point density if provided
     if kpt_density is not None:
         options["kpt_density"] = kpt_density
-    
+
     # Create input options
     input_options = CategorizedInputOptions(
         structure=structure,
@@ -184,13 +184,13 @@ def create_vasp_set(
         xc=xc,
         **options
     )
-    
+
     # Generate VASP input files
     vif = VaspInputFiles(
-        input_options, 
+        input_options,
         overridden_incar_settings=user_incar_settings or {}
     )
-    
+
     return VaspInputSet(
         incar=vif.incar,
         kpoints=vif.kpoints,

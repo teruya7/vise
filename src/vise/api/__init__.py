@@ -38,68 +38,67 @@ Usage:
 """
 
 # Structure API
-from vise.api.structure import (
-    get_symmetry_info,
-    get_primitive,
-    get_conventional,
-    SymmetryInfo,
-)
-
-# VASP inputs API
-from vise.api.vasp_inputs import (
-    create_vasp_set,
-    VaspInputSet,
-    get_available_tasks,
-    get_available_xc,
-)
-
 # Band structure API
 from vise.api.band import (
-    analyze_band,
     BandAnalysisResult,
-)
-
-# DOS API
-from vise.api.dos import (
-    analyze_dos,
-    DosAnalysisResult,
-)
-
-# Dielectric function API
-from vise.api.dielectric import (
-    analyze_dielectric,
-    load_dielectric_from_csv,
-    DielectricAnalysisResult,
+    analyze_band,
 )
 
 # Band edge and effective mass API
 from vise.api.band_edge import (
-    get_band_edge_properties,
-    calculate_effective_mass,
     BandEdgeResult,
     EffectiveMassResult,
     KpointInfo,
+    calculate_effective_mass,
+    get_band_edge_properties,
+)
+
+# Dielectric function API
+from vise.api.dielectric import (
+    DielectricAnalysisResult,
+    analyze_dielectric,
+    load_dielectric_from_csv,
+)
+
+# DOS API
+from vise.api.dos import (
+    DosAnalysisResult,
+    analyze_dos,
 )
 
 # Materials Project API
 from vise.api.materials_project import (
-    search_materials,
-    get_structure_by_id,
-    get_material_info,
-    get_most_stable_structure,
     MaterialEntry,
     MaterialInfo,
+    get_material_info,
+    get_most_stable_structure,
+    get_structure_by_id,
+    search_materials,
+)
+from vise.api.structure import (
+    SymmetryInfo,
+    get_conventional,
+    get_primitive,
+    get_symmetry_info,
 )
 
 # Utility API
 from vise.api.util import (
-    make_atom_poscars,
-    make_spin_decomposed_volumetric_files,
-    make_light_weight_volumetric_data,
-    create_vesta_file,
-    create_phonon_setup,
-    analyze_phonon,
     PhonopySetup,
+    analyze_phonon,
+    create_phonon_setup,
+    create_vesta_file,
+    make_atom_poscars,
+    make_light_weight_volumetric_data,
+    make_spin_decomposed_volumetric_files,
+)
+
+# VASP inputs API
+from vise.api.vasp_inputs import (
+    VaspInputSet,
+    create_vasp_set,
+    get_available_tasks,
+    get_available_xc,
 )
 
 __all__ = [

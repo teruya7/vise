@@ -6,7 +6,7 @@ This module provides ViseKpoints, an enhanced version of pymatgen's Kpoints
 class with improved string formatting for k-point output.
 """
 
-from typing import List, Optional
+from typing import List
 
 from pymatgen.io.vasp.sets import Kpoints
 

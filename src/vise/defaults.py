@@ -20,7 +20,7 @@ from __future__ import annotations
 import warnings
 from abc import ABC
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from monty.design_patterns import singleton
 

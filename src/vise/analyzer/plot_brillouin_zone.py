@@ -6,7 +6,7 @@ This module provides data classes for storing Brillouin zone visualization
 information, including zone faces, high-symmetry points, and band paths.
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from monty.json import MSONable

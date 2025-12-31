@@ -10,7 +10,7 @@ support for multiple band structure comparisons.
 from copy import deepcopy
 from dataclasses import dataclass
 from itertools import cycle
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 import matplotlib.pyplot as plt
 from monty.json import MSONable

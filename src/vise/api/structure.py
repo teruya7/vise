@@ -84,16 +84,16 @@ def get_symmetry_info(
     """
     symprec = symprec if symprec is not None else defaults.symmetry_length_tolerance
     angle_tolerance = angle_tolerance if angle_tolerance is not None else defaults.symmetry_angle_tolerance
-    
+
     symmetrizer = StructureSymmetrizer(
-        structure, 
-        symprec=symprec, 
+        structure,
+        symprec=symprec,
         angle_tolerance=angle_tolerance
     )
-    
+
     sym_data = symmetrizer.spglib_sym_data
     is_primitive = structure == symmetrizer.primitive
-    
+
     # Extract crystal system from BravaisLattice name (first letter)
     bravais_name = symmetrizer.bravais.name
     crystal_system_map = {
@@ -105,7 +105,7 @@ def get_symmetry_info(
         'c': 'cubic'
     }
     crystal_system = crystal_system_map.get(bravais_name[0], 'unknown')
-    
+
     return SymmetryInfo(
         space_group_symbol=sym_data.international,
         space_group_number=sym_data.number,
@@ -149,10 +149,10 @@ def get_primitive(
     """
     symprec = symprec if symprec is not None else defaults.symmetry_length_tolerance
     angle_tolerance = angle_tolerance if angle_tolerance is not None else defaults.symmetry_angle_tolerance
-    
+
     symmetrizer = StructureSymmetrizer(
-        structure, 
-        symprec=symprec, 
+        structure,
+        symprec=symprec,
         angle_tolerance=angle_tolerance
     )
     return symmetrizer.primitive
@@ -187,10 +187,10 @@ def get_conventional(
     """
     symprec = symprec if symprec is not None else defaults.symmetry_length_tolerance
     angle_tolerance = angle_tolerance if angle_tolerance is not None else defaults.symmetry_angle_tolerance
-    
+
     symmetrizer = StructureSymmetrizer(
-        structure, 
-        symprec=symprec, 
+        structure,
+        symprec=symprec,
         angle_tolerance=angle_tolerance
     )
     return symmetrizer.conventional

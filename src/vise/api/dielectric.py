@@ -15,11 +15,11 @@ Example:
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 from vise.analyzer.dielectric_function import DieleFuncData
-from vise.analyzer.vasp.make_diele_func import make_diele_func
 from vise.analyzer.plot_diele_func_data import DieleFuncMplPlotter, DieleFuncPlotType
+from vise.analyzer.vasp.make_diele_func import make_diele_func
 
 
 @dataclass
@@ -30,7 +30,7 @@ class DielectricAnalysisResult:
         diele_func_data: DieleFuncData object containing dielectric data
     """
     diele_func_data: DieleFuncData
-    
+
     def save_plot(
         self,
         filename: Union[str, Path] = "dielectric.pdf",
@@ -56,17 +56,17 @@ class DielectricAnalysisResult:
         """
         if isinstance(plot_type, str):
             plot_type = DieleFuncPlotType.from_string(plot_type)
-        
+
         y_range_processed = None
         if y_range:
             if plot_type is DieleFuncPlotType.absorption_coeff:
                 y_range_processed = [10 ** y_range[0], 10 ** y_range[1]]
             else:
                 y_range_processed = list(y_range)
-        
+
         if title:
             self.diele_func_data.title = title
-        
+
         plotter = DieleFuncMplPlotter(self.diele_func_data)
         plotter.construct_plot(
             directions=directions,
@@ -75,11 +75,11 @@ class DielectricAnalysisResult:
         )
         plotter.plt.savefig(str(filename), format=format)
         plotter.plt.close()
-    
+
     def save_json(self, filename: Union[str, Path] = "diele_func_data.json") -> None:
         """Save dielectric function data as JSON file."""
         self.diele_func_data.to_json_file(str(filename))
-    
+
     def save_csv(self, filename: Union[str, Path] = "diele_func_data.csv") -> None:
         """Save dielectric function data as CSV file."""
         self.diele_func_data.to_csv_file(str(filename))
@@ -112,18 +112,18 @@ def analyze_dielectric(
         >>> result.save_plot("imag.pdf", plot_type="imag")
         >>> result.save_plot("absorption.pdf", plot_type="absorption_coeff")
     """
-    from pymatgen.io.vasp import Vasprun, Outcar
-    
+    from pymatgen.io.vasp import Outcar, Vasprun
+
     vasprun_obj = Vasprun(str(vasprun))
     outcar_obj = Outcar(str(outcar))
-    
+
     diele_func_data = make_diele_func(
         vasprun_obj,
         outcar_obj,
         use_vasp_real=use_vasp_real,
         ita=ita
     )
-    
+
     return DielectricAnalysisResult(diele_func_data=diele_func_data)
 
 

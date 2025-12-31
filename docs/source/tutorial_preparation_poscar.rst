@@ -1,21 +1,21 @@
-Tutorial -- preparation of POSCAR
----------------------------------
+Tutorial -- Preparation of POSCAR
+----------------------------------
 
 In this tutorial, we show how to prepare POSCAR file via the Materials Project (MP) database.
 
-==============================
-Preparation of the POSCAR file
-==============================
-Firstly, we obtain the :code:`POSCAR` file through the MP REST API.
-(Of course, it's also fine to prepare POSCAR by another way.)
-For this, we need to set the PMG_MAPI_KEY in the .pmgrc.yaml file, e.g.,
-See `pymatgen web page 1 <https://pymatgen.org/usage.html>`_, for more details.
+.. contents:: Table of Contents
+   :local:
+   :depth: 2
 
-To confirm the pymatgen setting works properly, run the following python script snippet.
-Note that it creates vasp files, so it would be better to move to a temporary directory.
-If the :code:`VASP` files are not created, there should be a problem related to the pymatgen.
+Prerequisites
+=============
 
-::
+Before using Materials Project integration, configure your API key.
+See :doc:`installation` for details.
+
+Quick verification:
+
+.. code-block:: python
 
     from pymatgen.io.vasp.sets import VaspInputSet
     from pymatgen.core import Structure, Lattice
@@ -24,12 +24,68 @@ If the :code:`VASP` files are not created, there should be a problem related to 
     vasp_set = MPRelaxSet(s)
     vasp_set.write_input(".")
 
-Once we find the MP id (e.g., mp-2857 for ScN) via the MP web page,
-:code:`Vise` allows one to automatically retrieve the POSCAR files
-using the :code:`get_poscar` (= :code:`gp`) sub-command.
-For example, we can get the crystal structure of ScN by typing as follows:
+If VASP files are not created, check your pymatgen configuration.
 
-::
+Getting POSCAR from Materials Project
+=====================================
 
+Command Line
+~~~~~~~~~~~~
+
+Use the :code:`get_poscar` (= :code:`gp`) sub-command:
+
+.. code-block:: bash
+
+    # By Materials Project ID
     vise gp -m mp-2857
 
+    # By formula (gets most stable structure)
+    vise gp -f SrTiO3
+
+Python API
+~~~~~~~~~~
+
+.. code-block:: python
+
+    from vise.api import materials_project
+
+    # Search by formula
+    entries = materials_project.search_materials("TiO2")
+    for entry in entries[:5]:
+        print(f"{entry.material_id}: {entry.space_group}")
+
+    # Get structure by ID
+    struct = materials_project.get_structure_by_id("mp-2857", save_poscar=True)
+
+    # Get most stable structure
+    struct = materials_project.get_most_stable_structure("SrTiO3")
+
+Checking Structure Symmetry
+===========================
+
+After obtaining POSCAR, verify the structure:
+
+.. code-block:: bash
+
+    vise si
+
+    # Output example:
+    # Space group: Fm-3m (225)
+    # Crystal system: cubic
+    # Point group: m-3m
+
+Get primitive or conventional cells:
+
+.. code-block:: bash
+
+    # Primitive cell
+    vise si --primitive
+
+    # Conventional cell
+    vise si -c
+
+Next Steps
+==========
+
+- :doc:`tutorial_input_set` - Generate VASP input files
+- :doc:`cli_reference` - Full CLI command reference

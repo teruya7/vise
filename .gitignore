@@ -197,3 +197,4 @@ fabric.properties
 docs_rst/_static/
 docs_rst/_templates/
 test-results/
+.ruff_cache/
